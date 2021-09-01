@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <WarnAsErrors>nullable</WarnAsErrors>
+    <AssemblyName>Dicer</AssemblyName>
+    <RootNamespace>Dicer</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Nodes\" />
+    <Folder Include="Rollers\" />
+  </ItemGroup>
+
+</Project>
