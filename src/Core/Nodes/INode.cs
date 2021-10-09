@@ -2,10 +2,9 @@
 using Dicer.Rollers;
 using Dicer.Rounding;
 
-namespace Dicer.Nodes
+namespace Dicer.Nodes;
+
+public interface INode
 {
-	public interface INode
-	{
-		NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy);
-	}
+	NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy);
 }

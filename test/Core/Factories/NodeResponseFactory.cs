@@ -1,12 +1,11 @@
 ﻿using Dicer.Models;
 
-namespace Dicer.Tests.Factories
+namespace Dicer.Tests.Factories;
+
+public class NodeResponseFactory
 {
-	public class NodeResponseFactory
+	public static NodeResponse CreateSimpleResponse(double value)
 	{
-		public static NodeResponse CreateSimpleResponse(double value)
-		{
-			return new(value);
-		}
+		return new(value);
 	}
 }

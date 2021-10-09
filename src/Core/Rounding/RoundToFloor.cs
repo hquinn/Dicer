@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Dicer.Rounding
+namespace Dicer.Rounding;
+
+public class RoundToFloor : IRoundingStrategy
 {
-	public class RoundToFloor : IRoundingStrategy
+	public double Round(double number)
 	{
-		public double Round(double number)
-		{
-			return Math.Floor(number);
-		}
+		return Math.Floor(number);
 	}
 }

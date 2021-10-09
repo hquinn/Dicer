@@ -3,28 +3,27 @@ using Dicer.Tests.Factories;
 using FluentAssertions;
 using Xunit;
 
-namespace Dicer.Tests.Nodes
+namespace Dicer.Tests.Nodes;
+
+public class NumberNodeTests
 {
-	public class NumberNodeTests
+	public class EvaluateTests
 	{
-		public class EvaluateTests
+		[Theory]
+		[InlineData(1)]
+		[InlineData(2)]
+		public void ShouldReturnPassedInNumber(double number)
 		{
-			[Theory]
-			[InlineData(1)]
-			[InlineData(2)]
-			public void ShouldReturnPassedInNumber(double number)
-			{
-				// Arrange
-				var roller = RollerFactory.CreateEmptyRoller();
-				var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
-				var sut = new NumberNode(number);
+			// Arrange
+			var roller = RollerFactory.CreateEmptyRoller();
+			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
+			var sut = new NumberNode(number);
 
-				// Act
-				var evaluation = sut.Evaluate(roller, roundingStrategy);
+			// Act
+			var evaluation = sut.Evaluate(roller, roundingStrategy);
 
-				// Assert
-				evaluation.Result.Should().Be(number);
-			}
+			// Assert
+			evaluation.Result.Should().Be(number);
 		}
 	}
 }

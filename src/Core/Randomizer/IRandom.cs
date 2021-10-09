@@ -1,7 +1,6 @@
-﻿namespace Dicer.Randomizer
+﻿namespace Dicer.Randomizer;
+
+public interface IRandom
 {
-	public interface IRandom
-	{
-		int RollDice(int dieSize);
-	}
+	int RollDice(int dieSize);
 }

@@ -1,10 +1,9 @@
-﻿using Dicer;
-using System;
-using System.Linq;
-using Dicer.Models;
+﻿using Dicer.Models;
 using Dicer.Nodes;
 using Dicer.Rollers;
 using Dicer.Rounding;
+using System;
+using System.Linq;
 
 BasicArithmetic();
 DiceExample();

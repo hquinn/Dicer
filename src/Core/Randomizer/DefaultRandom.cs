@@ -1,12 +1,11 @@
 ﻿using System.Security.Cryptography;
 
-namespace Dicer.Randomizer
+namespace Dicer.Randomizer;
+
+public class DefaultRandom : IRandom
 {
-	public class DefaultRandom : IRandom
+	public int RollDice(int dieSize)
 	{
-		public int RollDice(int dieSize)
-		{
-			return RandomNumberGenerator.GetInt32(1, dieSize + 1);
-		}
+		return RandomNumberGenerator.GetInt32(1, dieSize + 1);
 	}
 }

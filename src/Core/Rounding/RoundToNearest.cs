@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Dicer.Rounding
+namespace Dicer.Rounding;
+
+public class RoundToNearest : IRoundingStrategy
 {
-	public class RoundToNearest : IRoundingStrategy
+	public double Round(double number)
 	{
-		public double Round(double number)
-		{
-			return Math.Round(number);
-		}
+		return Math.Round(number);
 	}
 }

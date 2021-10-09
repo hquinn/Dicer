@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Dicer.Rounding
+namespace Dicer.Rounding;
+
+public class RoundToCeiling : IRoundingStrategy
 {
-	public class RoundToCeiling : IRoundingStrategy
+	public double Round(double number)
 	{
-		public double Round(double number)
-		{
-			return Math.Ceiling(number);
-		}
+		return Math.Ceiling(number);
 	}
 }

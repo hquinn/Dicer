@@ -2,27 +2,26 @@
 using Dicer.Rollers;
 using Dicer.Rounding;
 
-namespace Dicer.Nodes
+namespace Dicer.Nodes;
+
+public class AddNode : INode
 {
-	public class AddNode : INode
+	private readonly INode _first;
+	private readonly INode _second;
+
+	public AddNode(INode first, INode second)
 	{
-		private readonly INode _first;
-		private readonly INode _second;
+		_first = first;
+		_second = second;
+	}
 
-		public AddNode(INode first, INode second)
-		{
-			_first = first;
-			_second = second;
-		}
+	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
+	{
+		return NodeResponse.Plus(_first.Evaluate(roller, roundingStrategy), _second.Evaluate(roller, roundingStrategy), roundingStrategy);
+	}
 
-		public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-		{
-			return NodeResponse.Plus(_first.Evaluate(roller, roundingStrategy), _second.Evaluate(roller, roundingStrategy), roundingStrategy);
-		}
-
-		public override string ToString()
-		{
-			return $"ADD({_first},{_second})";
-		}
+	public override string ToString()
+	{
+		return $"ADD({_first},{_second})";
 	}
 }

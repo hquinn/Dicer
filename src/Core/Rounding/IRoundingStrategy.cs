@@ -1,7 +1,6 @@
-﻿namespace Dicer.Rounding
+﻿namespace Dicer.Rounding;
+
+public interface IRoundingStrategy
 {
-	public interface IRoundingStrategy
-	{
-		double Round(double number);
-	}
+	double Round(double number);
 }

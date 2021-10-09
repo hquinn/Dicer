@@ -1,24 +1,23 @@
-﻿using System.Linq;
-using Dicer.Randomizer;
+﻿using Dicer.Randomizer;
 using Dicer.Tests.Helpers;
 using NSubstitute;
+using System.Linq;
 
-namespace Dicer.Tests.Factories
+namespace Dicer.Tests.Factories;
+
+public static class RandomFactory
 {
-	public static class RandomFactory
+	public static IRandom CreateRandom(params int[] randomValues)
 	{
-		public static IRandom CreateRandom(params int[] randomValues)
+		if (!randomValues.Any())
 		{
-			if (!randomValues.Any())
-			{
-				randomValues = new[] { 2 };
-			}
-
-			var queue = new InfiniteQueue(randomValues);
-			var mockRandom = Substitute.For<IRandom>();
-			mockRandom.RollDice(Arg.Any<int>()).Returns(x => queue.Dequeue());
-
-			return mockRandom;
+			randomValues = new[] { 2 };
 		}
+
+		var queue = new InfiniteQueue(randomValues);
+		var mockRandom = Substitute.For<IRandom>();
+		mockRandom.RollDice(Arg.Any<int>()).Returns(x => queue.Dequeue());
+
+		return mockRandom;
 	}
 }
