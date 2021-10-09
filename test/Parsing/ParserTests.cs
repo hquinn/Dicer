@@ -45,6 +45,7 @@ namespace Dicer.Parser.Tests
 		[Theory]
 		[InlineData("4K3")]
 		[InlineData("4*(3+1")]
+		[InlineData("4**3")]
 		public void ShouldThrowExceptionFromInvalidInputString(string input)
 		{
 			Action action = () => Parse(input);
