@@ -4,7 +4,6 @@ using Dicer.Rollers;
 using Dicer.Rounding;
 using System;
 using System.Linq;
-using Dicer.Parser;
 using static Dicer.Parser.Parser;
 
 BasicArithmetic();
