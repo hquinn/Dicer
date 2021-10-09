@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Dicer.Parser.Exceptions;
 
 namespace Dicer.Parser;
 
 internal static class Tokenizer
 {
-	public static IEnumerable<Token> Tokenize(string input)
+	internal static IEnumerable<Token> Tokenize(string input)
 	{
 		var reader = new StringReader(input);
 
@@ -74,7 +75,7 @@ internal static class Tokenizer
 				reader.Read();
 			}
 
-			else throw new NotImplementedException();
+			else throw new ParsingException($"Token '{character}' cannot be tokenized.");
 		}
 	}
 

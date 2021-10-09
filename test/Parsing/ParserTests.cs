@@ -52,6 +52,7 @@ public class ParserTests
 	[InlineData("4K3")]
 	[InlineData("4*(3+1")]
 	[InlineData("4**3")]
+	[InlineData("4*3+a")]
 	public void ShouldThrowExceptionFromInvalidInputString(string input)
 	{
 		Action action = () => Parse(input);
