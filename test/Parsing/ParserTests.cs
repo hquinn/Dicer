@@ -33,6 +33,11 @@ namespace Dicer.Parser.Tests
 		[InlineData("4D6K3+3", "ADD(DICE(4,6,3),3)")]
 		[InlineData("(1+2) * 3", "MULTIPLY(ADD(1,2),3)")]
 		[InlineData("(1+(1 + 1)) * 3", "MULTIPLY(ADD(1,ADD(1,1)),3)")]
+		[InlineData("-1", "UNARY(1)")]
+		[InlineData("-1+2", "ADD(UNARY(1),2)")]
+		[InlineData("-(1+2)", "UNARY(ADD(1,2))")]
+		[InlineData("+-(1+2)", "UNARY(ADD(1,2))")]
+		[InlineData("++(1+2)", "ADD(1,2)")]
 		public void ShouldConstructNodesFromValidInputString(string input, string expected)
 		{
 			// Act

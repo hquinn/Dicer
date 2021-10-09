@@ -81,5 +81,14 @@ namespace Dicer.Tests.Factories
 
 			return new(mockNumDice, mockDieSize);
 		}
+
+		public static UnaryNode CreateUnaryNode(double node)
+		{
+			var nodeRolls = new[] { new RollResponse((int)node, new[] { new Roll((int)node, (int)node) }) };
+			var mockNode = Substitute.For<INode>();
+			mockNode.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(node, nodeRolls));
+
+			return new(mockNode);
+		}
 	}
 }

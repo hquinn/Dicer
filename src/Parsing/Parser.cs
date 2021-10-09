@@ -16,7 +16,7 @@ namespace Dicer.Parser
 
 			if (token is not null)
 			{
-				throw new ParsingException($"Token {token?.Value?.Value ?? "null"} is invalid at this position");
+				throw new ParsingException($"Token {token.Value.Value} is invalid at this position");
 			}
 
 			return node;
@@ -101,7 +101,7 @@ namespace Dicer.Parser
 
 		private static INode ParseDice(ref LinkedListNode<Token>? token)
 		{
-			var lhs = ParseLeaf(ref token);
+			var lhs = ParseUnary(ref token);
 
 			while (token is not null)
 			{
@@ -137,6 +137,28 @@ namespace Dicer.Parser
 			return lhs;
 		}
 
+		private static INode ParseUnary(ref LinkedListNode<Token>? token)
+		{
+			while (token is not null)
+			{
+				if (token.Value is AddToken)
+				{
+					Increment(ref token);
+
+					continue;
+				}
+				if (token.Value is SubtractToken)
+				{
+					Increment(ref token);
+
+					return new UnaryNode(ParseLeaf(ref token));
+				}
+				return ParseLeaf(ref token);
+			}
+
+			return ParseLeaf(ref token);
+		}
+		
 		private static INode ParseLeaf(ref LinkedListNode<Token>? token)
 		{
 			if (token?.Value is NumberToken number)
@@ -160,7 +182,7 @@ namespace Dicer.Parser
 				return node;
 			}
 
-			throw new ParsingException($"Token {token?.Value?.Value} is invalid at this position");
+			throw new ParsingException($"Token {token?.Value.Value} is invalid at this position");
 		}
 
 		private static void Increment(ref LinkedListNode<Token>? token)
