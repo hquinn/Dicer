@@ -19,5 +19,10 @@ namespace Dicer.Nodes
 		{
 			return NodeResponse.Divide(_first.Evaluate(roller, roundingStrategy), _second.Evaluate(roller, roundingStrategy), roundingStrategy);
 		}
+
+		public override string ToString()
+		{
+			return $"DIVIDE({_first},{_second})";
+		}
 	}
 }

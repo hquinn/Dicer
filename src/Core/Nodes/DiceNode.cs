@@ -29,5 +29,11 @@ namespace Dicer.Nodes
 			var mergedRolls = RollHelpers.Merge(numDiceResponse.RollResponses, new[] { rollResult }, dieSizeResponse.RollResponses);
 			return new(rollResult.Result, mergedRolls);
 		}
+
+		public override string ToString()
+		{
+			string keep = _keep is not null ? $",{_keep}" : string.Empty;
+			return $"DICE({_numDice},{_dieSize}{keep})";
+		}
 	}
 }

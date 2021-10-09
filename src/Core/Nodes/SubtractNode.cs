@@ -19,5 +19,10 @@ namespace Dicer.Nodes
 		{
 			return NodeResponse.Minus(_first.Evaluate(roller, roundingStrategy), _second.Evaluate(roller, roundingStrategy), roundingStrategy);
 		}
+
+		public override string ToString()
+		{
+			return $"SUBTRACT({_first},{_second})";
+		}
 	}
 }

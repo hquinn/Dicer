@@ -1,4 +1,5 @@
-﻿using Dicer.Models;
+﻿using System.Globalization;
+using Dicer.Models;
 using Dicer.Rollers;
 using Dicer.Rounding;
 
@@ -16,6 +17,11 @@ namespace Dicer.Nodes
 		public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 		{
 			return new(roundingStrategy.Round(_number));
+		}
+
+		public override string ToString()
+		{
+			return $"{_number}";
 		}
 	}
 }
