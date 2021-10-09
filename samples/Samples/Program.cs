@@ -4,10 +4,14 @@ using Dicer.Rollers;
 using Dicer.Rounding;
 using System;
 using System.Linq;
+using Dicer.Parser;
+using static Dicer.Parser.Parser;
 
 BasicArithmetic();
 DiceExample();
 KeepLowestExample();
+BasicParsingExample();
+ComplexParsingExample();
 
 static void BasicArithmetic()
 {
@@ -29,6 +33,22 @@ static void KeepLowestExample()
 	var node = new DiceNode(new NumberNode(4), new NumberNode(6), new NumberNode(-3));
 	var response = node.Evaluate(new RandomRoller(), new RoundToNearest());
 	Console.WriteLine($"KeepLowestExample Result: {response.Result}");
+	OutputRolls(response);
+}
+
+static void BasicParsingExample()
+{
+	var node = Parse("4D6K3 + 2d10");
+	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
+	Console.WriteLine($"BasicParsingExample Result: {response.Result}");
+	OutputRolls(response);
+}
+
+static void ComplexParsingExample()
+{
+	var node = Parse("4D(5/(1+2))K-3 +- (5*(1+2))d10");
+	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
+	Console.WriteLine($"ComplexParsingExample Result: {response.Result}");
 	OutputRolls(response);
 }
 
