@@ -38,6 +38,7 @@ public class ParserTests
 	[InlineData("-(1+2)", "UNARY(ADD(1,2))")]
 	[InlineData("+-(1+2)", "UNARY(ADD(1,2))")]
 	[InlineData("++(1+2)", "ADD(1,2)")]
+	[InlineData("4D6K-3+3", "ADD(DICE(4,6,UNARY(3)),3)")]
 	public void ShouldConstructNodesFromValidInputString(string input, string expected)
 	{
 		// Act

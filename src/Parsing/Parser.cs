@@ -84,7 +84,7 @@ public static class Parser
 
 			Increment(ref token);
 
-			var rhs = ParseLeaf(ref token);
+			var rhs = ParseDice(ref token);
 
 			if (currentToken is MultiplyToken)
 			{
@@ -119,12 +119,12 @@ public static class Parser
 
 			Increment(ref token);
 
-			var rhs = ParseLeaf(ref token);
+			var rhs = ParseUnary(ref token);
 
 			if (token?.Value is KeepToken)
 			{
 				Increment(ref token);
-				var khs = ParseLeaf(ref token);
+				var khs = ParseUnary(ref token);
 				lhs = new DiceNode(lhs, rhs, khs);
 			}
 
