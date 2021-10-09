@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Dicer.Rollers;
 
+/// <summary>
+/// Rolls dice using a random roll for each die.
+/// </summary>
 public class RandomRoller : IRoller
 {
 	private readonly IRandom _random;
@@ -21,6 +24,7 @@ public class RandomRoller : IRoller
 		_random = random;
 	}
 
+	/// <inheritdoc />
 	public RollResponse Roll(NodeResponse numDice, NodeResponse dieSize, NodeResponse? keep, IRoundingStrategy roundingStrategy)
 	{
 		var numDiceResult = (int)roundingStrategy.Round(numDice.Result);

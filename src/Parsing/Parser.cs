@@ -8,6 +8,12 @@ namespace Dicer.Parser;
 
 public static class Parser
 {
+	/// <summary>
+	/// Parses the <paramref name="input"/> into an <see cref="INode"/> expression tree.
+	/// </summary>
+	/// <param name="input">The mathematical expression to parse.</param>
+	/// <returns><see cref="INode"/> expression tree.</returns>
+	/// <exception cref="ParsingException">For invalid characters in <see cref="input"/></exception>
 	public static INode Parse(string input)
 	{
 		var tokens = new LinkedList<Token>(Tokenize(input));

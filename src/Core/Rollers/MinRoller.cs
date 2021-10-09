@@ -5,8 +5,12 @@ using System.Linq;
 
 namespace Dicer.Rollers;
 
+/// <summary>
+/// Rolls dice using the min roll for each die.
+/// </summary>
 public class MinRoller : IRoller
 {
+	/// <inheritdoc />
 	public RollResponse Roll(NodeResponse numDice, NodeResponse dieSize, NodeResponse? keep, IRoundingStrategy roundingStrategy)
 	{
 		var numDiceResult = (int)roundingStrategy.Round(numDice.Result);

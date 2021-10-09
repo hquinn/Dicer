@@ -5,6 +5,9 @@ using Dicer.Rounding;
 
 namespace Dicer.Nodes;
 
+/// <summary>
+/// Node for representing dice.
+/// </summary>
 public class DiceNode : INode
 {
 	private readonly INode _numDice;
@@ -18,6 +21,7 @@ public class DiceNode : INode
 		_keep = keep;
 	}
 
+	/// <inheritdoc />
 	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
 		var numDiceResponse = _numDice.Evaluate(roller, roundingStrategy);

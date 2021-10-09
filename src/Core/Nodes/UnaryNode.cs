@@ -4,6 +4,9 @@ using Dicer.Rounding;
 
 namespace Dicer.Nodes;
 
+/// <summary>
+/// Node that represents the unary of an <see cref="INode"/>.
+/// </summary>
 public class UnaryNode : INode
 {
 	private readonly INode _node;
@@ -13,6 +16,7 @@ public class UnaryNode : INode
 		_node = node;
 	}
 
+	/// <inheritdoc />
 	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
 		return NodeResponse.Unary(_node.Evaluate(roller, roundingStrategy), roundingStrategy);

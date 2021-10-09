@@ -4,6 +4,9 @@ using Dicer.Rounding;
 
 namespace Dicer.Nodes;
 
+/// <summary>
+/// Node that represents a number.
+/// </summary>
 public class NumberNode : INode
 {
 	private readonly double _number;
@@ -13,6 +16,7 @@ public class NumberNode : INode
 		_number = number;
 	}
 
+	/// <inheritdoc />
 	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
 		return new(roundingStrategy.Round(_number));
