@@ -1,7 +1,7 @@
-﻿using Dicer.Models;
+﻿using Dicer.Helpers;
+using Dicer.Models;
 using Dicer.Rounding;
-using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Dicer.Rollers;
 
@@ -13,11 +13,28 @@ public class MaxRoller : IRoller
 	/// <inheritdoc />
 	public RollResponse Roll(NodeResponse numDice, NodeResponse dieSize, NodeResponse? keep, IRoundingStrategy roundingStrategy)
 	{
-		var numDiceResult = (int)roundingStrategy.Round(numDice.Result);
-		var dieSizeResult = (int)roundingStrategy.Round(dieSize.Result);
-		var keepResult = keep is null ? numDiceResult : (int)roundingStrategy.Round(Math.Abs(keep.Result));
-		keepResult = Math.Min(keepResult, numDiceResult);
+		var numDiceResult = new NodeRollResponse(numDice, roundingStrategy);
+		var dieSizeResult = new NodeRollResponse(dieSize, roundingStrategy);
+		var rolls = RollDice(numDiceResult, dieSizeResult)
+			.PickDiceToKeep(keep, roundingStrategy);
 
-		return new(dieSizeResult * keepResult, Enumerable.Repeat(new Roll(dieSizeResult, dieSizeResult), keepResult));
+		return RollResponse.CreateResponse(rolls);
+	}
+
+	private static IEnumerable<Roll> RollDice(NodeRollResponse numDiceResult, NodeRollResponse dieSizeResult)
+	{
+		var max = dieSizeResult.Result;
+
+		if (dieSizeResult.IsNegative)
+		{
+			max = -max;
+		}
+
+		var numDiceMultiplier = numDiceResult.IsNegative ? -1 : 1;
+		var dieSizeMultiplier = dieSizeResult.IsNegative ? -1 : 1;
+		for (var i = 1; i <= numDiceResult.Result; i++)
+		{
+			yield return new(max * numDiceMultiplier, dieSizeResult.Result * dieSizeMultiplier);
+		}
 	}
 }

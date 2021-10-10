@@ -1,7 +1,7 @@
-﻿using Dicer.Models;
+﻿using Dicer.Helpers;
+using Dicer.Models;
 using Dicer.Rounding;
-using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Dicer.Rollers;
 
@@ -13,12 +13,28 @@ public class AverageRoller : IRoller
 	/// <inheritdoc />
 	public RollResponse Roll(NodeResponse numDice, NodeResponse dieSize, NodeResponse? keep, IRoundingStrategy roundingStrategy)
 	{
-		var numDiceResult = (int)roundingStrategy.Round(numDice.Result);
-		var dieSizeResult = (int)roundingStrategy.Round(dieSize.Result);
-		var keepResult = keep is null ? numDiceResult : (int)roundingStrategy.Round(Math.Abs(keep.Result));
-		keepResult = Math.Min(keepResult, numDiceResult);
-		var average = (int)roundingStrategy.Round((dieSizeResult + 1) / 2.0);
+		var numDiceResult = new NodeRollResponse(numDice, roundingStrategy);
+		var dieSizeResult = new NodeRollResponse(dieSize, roundingStrategy);
+		var rolls = RollDice(numDiceResult, dieSizeResult, roundingStrategy)
+			.PickDiceToKeep(keep, roundingStrategy);
 
-		return new(average * keepResult, Enumerable.Repeat(new Roll(average, dieSizeResult), keepResult));
+		return RollResponse.CreateResponse(rolls);
+	}
+
+	private static IEnumerable<Roll> RollDice(NodeRollResponse numDiceResult, NodeRollResponse dieSizeResult, IRoundingStrategy roundingStrategy)
+	{
+		var average = (int)roundingStrategy.Round((dieSizeResult.Result + 1) / 2.0);
+
+		if (dieSizeResult.IsNegative)
+		{
+			average = -average;
+		}
+
+		var numDiceMultiplier = numDiceResult.IsNegative ? -1 : 1;
+		var dieSizeMultiplier = dieSizeResult.IsNegative ? -1 : 1;
+		for (var i = 1; i <= numDiceResult.Result; i++)
+		{
+			yield return new(average * numDiceMultiplier, dieSizeResult.Result * dieSizeMultiplier);
+		}
 	}
 }

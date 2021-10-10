@@ -1,7 +1,7 @@
-﻿using Dicer.Models;
+﻿using Dicer.Helpers;
+using Dicer.Models;
 using Dicer.Rounding;
-using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Dicer.Rollers;
 
@@ -13,11 +13,30 @@ public class MinRoller : IRoller
 	/// <inheritdoc />
 	public RollResponse Roll(NodeResponse numDice, NodeResponse dieSize, NodeResponse? keep, IRoundingStrategy roundingStrategy)
 	{
-		var numDiceResult = (int)roundingStrategy.Round(numDice.Result);
-		var dieSizeResult = (int)roundingStrategy.Round(dieSize.Result);
-		var keepResult = keep is null ? numDiceResult : (int)roundingStrategy.Round(Math.Abs(keep.Result));
-		keepResult = Math.Min(keepResult, numDiceResult);
+		var numDiceResult = new NodeRollResponse(numDice, roundingStrategy);
+		var dieSizeResult = new NodeRollResponse(dieSize, roundingStrategy);
 
-		return new(keepResult, Enumerable.Repeat(new Roll(1, dieSizeResult), keepResult));
+		var rolls = RollDice(numDiceResult, dieSizeResult)
+			.PickDiceToKeep(keep, roundingStrategy);
+
+		return RollResponse.CreateResponse(rolls);
+	}
+
+	private static IEnumerable<Roll> RollDice(NodeRollResponse numDiceResult, NodeRollResponse dieSizeResult)
+	{
+		var min = 1;
+
+		if (dieSizeResult.IsNegative)
+		{
+			min = -min;
+		}
+
+		var numDiceMultiplier = numDiceResult.IsNegative ? -1 : 1;
+		var dieSizeMultiplier = dieSizeResult.IsNegative ? -1 : 1;
+
+		for (var i = 1; i <= numDiceResult.Result; i++)
+		{
+			yield return new(min * numDiceMultiplier, dieSizeResult.Result * dieSizeMultiplier);
+		}
 	}
 }

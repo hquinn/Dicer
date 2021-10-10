@@ -82,5 +82,26 @@ public class AverageRollerTests
 			// Assert
 			result.Should().BeEquivalentTo(expected);
 		}
+
+		[Theory]
+		[InlineData(-4, -6, 3, 4, -6, 3, 12)]
+		[InlineData(4, -6, 3, -4, -6, 3, -12)]
+		[InlineData(-4, 6, 3, -4, 6, 3, -12)]
+		public void ShouldHandleResultIfNegative(int numDiceParam, int dieSizeParam, int keepParam, int numDiceResult, int dieSizeResult, int keepResult, int result)
+		{
+			// Arrange
+			var numDice = NodeResponseFactory.CreateSimpleResponse(numDiceParam);
+			var dieSize = NodeResponseFactory.CreateSimpleResponse(dieSizeParam);
+			var keep = NodeResponseFactory.CreateSimpleResponse(keepParam);
+			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
+			var sut = new AverageRoller();
+			var expected = new RollResponse(result, Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
+
+			// Act
+			var actual = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+
+			// Assert
+			actual.Should().BeEquivalentTo(expected);
+		}
 	}
 }
