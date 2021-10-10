@@ -2,7 +2,7 @@
 using Dicer.Rounding;
 using System;
 
-namespace Dicer.Rollers;
+namespace Dicer.Models;
 
 internal class NodeRollResponse
 {
