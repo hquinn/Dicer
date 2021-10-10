@@ -13,7 +13,7 @@ public static class Parser
 	/// </summary>
 	/// <param name="input">The mathematical expression to parse.</param>
 	/// <returns><see cref="INode"/> expression tree.</returns>
-	/// <exception cref="ParsingException">For invalid characters in <see cref="input"/></exception>
+	/// <exception cref="ParsingException">For invalid characters in <paramref name="input"/>.</exception>
 	public static INode Parse(string input)
 	{
 		var tokens = new LinkedList<Token>(Tokenize(input));
@@ -26,6 +26,21 @@ public static class Parser
 		}
 
 		return node;
+	}
+
+	/// <summary>
+	/// Parses the <paramref name="nodeInput"/> and <paramref name="repeatInput"/> into an <see cref="IRepeatingNode"/> expression tree.
+	/// </summary>
+	/// <param name="nodeInput">The mathematical expression to parse.</param>
+	/// <param name="repeatInput">The mathematical expression to parse for number of times to repeat <paramref name="nodeInput"/>.</param>
+	/// <returns><see cref="IRepeatingNode"/> expression tree.</returns>
+	/// <exception cref="ParsingException">For invalid characters in <paramref name="nodeInput"/>.</exception>
+	public static IRepeatingNode Parse(string nodeInput, string repeatInput)
+	{
+		var node = Parse(nodeInput);
+		var repeat = Parse(repeatInput);
+
+		return new RepeatingNode(node, repeat);
 	}
 
 	private static INode ParseAddSubtract(ref LinkedListNode<Token>? token)

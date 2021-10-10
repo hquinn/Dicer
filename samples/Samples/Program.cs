@@ -11,6 +11,7 @@ DiceExample();
 KeepLowestExample();
 BasicParsingExample();
 ComplexParsingExample();
+BasicRepeatingNodeExample();
 
 static void BasicArithmetic()
 {
@@ -49,6 +50,19 @@ static void ComplexParsingExample()
 	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
 	Console.WriteLine($"ComplexParsingExample Result: {response.Result}");
 	OutputRolls(response);
+}
+
+static void BasicRepeatingNodeExample()
+{
+	var node = Parse("4D6K3", "6");
+	var responses = node.Evaluate(new RandomRoller(), new RoundToCeiling());
+
+	int counter = 1;
+	foreach (var response in responses)
+	{
+		Console.WriteLine($"BasicRepeatingNodeExample Result {counter++}: {response.Result}");
+		OutputRolls(response);
+	}
 }
 
 static void OutputRolls(NodeResponse response)
