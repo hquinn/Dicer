@@ -40,7 +40,7 @@ public class RandomRollerTests
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1, 2);
 			var sut = new RandomRoller(random);
-			var expected = new RollResponse(4, new[] { new Roll(2, 6) }.Concat(Enumerable.Repeat(new Roll(1, 6), 2)));
+			var expected = RollResponseFactory.CreateResponse(result: 4, dieSize: 6,  1, 1, 2);
 
 			// Act
 			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
@@ -59,7 +59,7 @@ public class RandomRollerTests
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1);
 			var sut = new RandomRoller(random);
-			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
+			var expected = RollResponseFactory.CreateResponse(result: 3, dieSize: 6, 1, 1, 1);
 
 			// Act
 			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
