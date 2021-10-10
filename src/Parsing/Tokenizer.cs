@@ -1,9 +1,8 @@
-﻿using Dicer.Parser.Tokens;
-using System;
+﻿using Dicer.Parser.Exceptions;
+using Dicer.Parser.Tokens;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Dicer.Parser.Exceptions;
 
 namespace Dicer.Parser;
 
