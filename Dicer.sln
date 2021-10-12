@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Tests", "test\Core\Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples", "samples\Samples\Samples.csproj", "{2F750E93-D610-485D-9A48-B09B2E7C6636}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parsing", "src\Parsing\Parsing.csproj", "{96587B4A-E2C2-4FFD-90C3-14B67BE0434D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parsing", "src\Parsing\Parsing.csproj", "{96587B4A-E2C2-4FFD-90C3-14B67BE0434D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parsing.Tests", "test\Parsing\Parsing.Tests.csproj", "{97081286-587E-4212-93DB-F0651F2D7014}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parsing.Benchmarks", "benchmark\Parsing\Parsing.Benchmarks.csproj", "{A6FF82DC-719B-4FCD-B564-4D69C2A2749C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{97081286-587E-4212-93DB-F0651F2D7014}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97081286-587E-4212-93DB-F0651F2D7014}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97081286-587E-4212-93DB-F0651F2D7014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6FF82DC-719B-4FCD-B564-4D69C2A2749C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6FF82DC-719B-4FCD-B564-4D69C2A2749C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6FF82DC-719B-4FCD-B564-4D69C2A2749C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6FF82DC-719B-4FCD-B564-4D69C2A2749C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
