@@ -11,6 +11,7 @@ public class ParserTests
 	[Theory]
 	[InlineData("1", "1")]
 	[InlineData("2", "2")]
+	[InlineData("1.5", "1.5")]
 	[InlineData("1+2", "ADD(1,2)")]
 	[InlineData("1 + 2", "ADD(1,2)")]
 	[InlineData("1 + 2 + 3 + 4 + 6 + 2 + 10", "ADD(ADD(ADD(ADD(ADD(ADD(1,2),3),4),6),2),10)")]
@@ -39,6 +40,7 @@ public class ParserTests
 	[InlineData("+-(1+2)", "UNARY(ADD(1,2))")]
 	[InlineData("++(1+2)", "ADD(1,2)")]
 	[InlineData("4D6K-3+3", "ADD(DICE(4,6,UNARY(3)),3)")]
+	[InlineData("--1", "UNARY(UNARY(1))")]
 	public void ShouldConstructNodesFromValidInputString(string input, string expected)
 	{
 		// Act
@@ -51,6 +53,7 @@ public class ParserTests
 	[Theory]
 	[InlineData("1", "1", "REPEAT(1,1)")]
 	[InlineData("2", "2", "REPEAT(2,2)")]
+	[InlineData("1.5", "1", "REPEAT(1.5,1)")]
 	[InlineData("1+2", "2", "REPEAT(ADD(1,2),2)")]
 	[InlineData("1 + 2", "1+1", "REPEAT(ADD(1,2),ADD(1,1))")]
 	[InlineData("1 + 2 + 3 + 4 + 6 + 2 + 10", "2", "REPEAT(ADD(ADD(ADD(ADD(ADD(ADD(1,2),3),4),6),2),10),2)")]
@@ -79,6 +82,7 @@ public class ParserTests
 	[InlineData("+-(1+2)", "2", "REPEAT(UNARY(ADD(1,2)),2)")]
 	[InlineData("++(1+2)", "2", "REPEAT(ADD(1,2),2)")]
 	[InlineData("4D6K-3+3", "2", "REPEAT(ADD(DICE(4,6,UNARY(3)),3),2)")]
+	[InlineData("--1", "3", "REPEAT(UNARY(UNARY(1)),3)")]
 	public void ShouldConstructRepeatingNodesFromValidInputString(string nodeInput, string repeatingInput, string expected)
 	{
 		// Act
@@ -93,6 +97,7 @@ public class ParserTests
 	[InlineData("4*(3+1")]
 	[InlineData("4**3")]
 	[InlineData("4*3+a")]
+	[InlineData("1..5")]
 	public void ShouldThrowExceptionFromInvalidInputString(string input)
 	{
 		Action action = () => Parse(input);

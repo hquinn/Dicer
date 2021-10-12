@@ -172,7 +172,10 @@ public static class Parser
 			{
 				Increment(ref token);
 
-				return new UnaryNode(ParseLeaf(ref token));
+				if (token?.Value is SubtractToken or AddToken)
+					return new UnaryNode(ParseUnary(ref token));
+				else
+					return new UnaryNode(ParseLeaf(ref token));
 			}
 			return ParseLeaf(ref token);
 		}

@@ -81,11 +81,24 @@ internal static class Tokenizer
 	private static string ParseNumber(TextReader reader)
 	{
 		var builder = new StringBuilder();
+		var dotCount = 0;
 
 		do
 		{
-			builder.Append((char)reader.Read());
-		} while (char.IsDigit((char)reader.Peek()));
+			var character = (char)reader.Read();
+
+			if (character == '.')
+			{
+				dotCount++;
+
+				if (dotCount > 1)
+				{
+					throw new ParsingException("Number has too many full stops");
+				}
+			}
+
+			builder.Append(character);
+		} while (char.IsDigit((char)reader.Peek()) || (char)reader.Peek() == '.');
 
 		return builder.ToString();
 	}
