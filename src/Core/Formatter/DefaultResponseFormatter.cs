@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Dicer.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Dicer.Models;
 
 namespace Dicer.Formatter;
 
@@ -43,7 +43,7 @@ public class DefaultResponseFormatter : IResponseFormatter
 
 			if (rollArray.Any())
 			{
-				builder.AppendLine($"Die Size({rollArray.First().DieSize}): [{string.Join(", ", rollArray.Select(x => x.Result.ToString()))}]");
+				builder.AppendLine($"Die Size({rollArray.First().DieSize}): [{string.Join(", ", rollArray.Select(x => x.Result))}]");
 			}
 		}
 	}

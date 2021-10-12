@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Dicer.Models;
+﻿using Dicer.Models;
+using System.Collections.Generic;
 
 namespace Dicer.Formatter;
 

@@ -1,10 +1,8 @@
-﻿using Dicer.Models;
+﻿using Dicer.Formatter;
 using Dicer.Nodes;
 using Dicer.Rollers;
 using Dicer.Rounding;
 using System;
-using System.Linq;
-using Dicer.Formatter;
 using static Dicer.Parser.Parser;
 
 var formatter = new DefaultResponseFormatter();
