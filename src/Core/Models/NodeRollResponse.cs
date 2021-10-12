@@ -1,19 +1,16 @@
-﻿using Dicer.Models;
-using Dicer.Rounding;
+﻿using Dicer.Rounding;
 using System;
 
 namespace Dicer.Models;
 
 internal class NodeRollResponse
 {
-	public NodeRollResponse(NodeResponse response, IRoundingStrategy roundingStrategy)
+	public NodeRollResponse(double result, IRoundingStrategy roundingStrategy)
 	{
-		Response = response;
-		IsNegative = response.Result < 0;
-		Result = (int)roundingStrategy.Round(Math.Abs(response.Result));
+		IsNegative = result < 0;
+		Result = (int)roundingStrategy.Round(Math.Abs(result));
 	}
 
-	public NodeResponse Response { get; }
 	public int Result { get; }
 	public bool IsNegative { get; }
 };
