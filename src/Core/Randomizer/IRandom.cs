@@ -1,12 +1,12 @@
 ﻿namespace Dicer.Randomizer;
 
 /// <summary>
-/// Interface for implementing random number generators for rolling dice.
+///     Interface for implementing random number generators for rolling dice.
 /// </summary>
 public interface IRandom
 {
 	/// <summary>
-	/// Generates a random number in a format most suitable for dice rolls.
+	///     Generates a random number in a format most suitable for dice rolls.
 	/// </summary>
 	/// <param name="dieSize"></param>
 	/// <returns>A random number as if a die was rolled.</returns>

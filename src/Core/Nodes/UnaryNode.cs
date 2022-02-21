@@ -5,7 +5,7 @@ using Dicer.Rounding;
 namespace Dicer.Nodes;
 
 /// <summary>
-/// Node that represents the unary of an <see cref="INode"/>.
+///     Node that represents the unary of an <see cref="INode" />.
 /// </summary>
 public class UnaryNode : INode
 {

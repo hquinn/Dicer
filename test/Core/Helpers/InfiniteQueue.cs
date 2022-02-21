@@ -6,7 +6,7 @@ namespace Dicer.Tests.Helpers;
 public class InfiniteQueue
 {
 	private readonly Queue<int> _queue;
-	private int _last = 0;
+	private int _last;
 
 	public InfiniteQueue(params int[] numbers)
 	{

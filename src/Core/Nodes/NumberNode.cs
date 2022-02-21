@@ -5,7 +5,7 @@ using Dicer.Rounding;
 namespace Dicer.Nodes;
 
 /// <summary>
-/// Node that represents a number.
+///     Node that represents a number.
 /// </summary>
 public class NumberNode : INode
 {

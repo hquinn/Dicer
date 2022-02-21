@@ -4,7 +4,7 @@ using Dicer.Rounding;
 namespace Dicer.Rollers;
 
 /// <summary>
-/// Rolls dice using a random roll for each die.
+///     Rolls dice using a random roll for each die.
 /// </summary>
 public class RandomRoller : BaseRoller
 {

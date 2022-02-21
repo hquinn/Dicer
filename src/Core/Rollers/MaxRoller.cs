@@ -3,7 +3,7 @@
 namespace Dicer.Rollers;
 
 /// <summary>
-/// Rolls dice using the max roll for each die.
+///     Rolls dice using the max roll for each die.
 /// </summary>
 public class MaxRoller : BaseRoller
 {

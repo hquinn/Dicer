@@ -3,7 +3,7 @@
 namespace Dicer.Rounding;
 
 /// <summary>
-/// Always rounds the number to the next highest integer.
+///     Always rounds the number to the next highest integer.
 /// </summary>
 public class RoundToCeiling : IRoundingStrategy
 {

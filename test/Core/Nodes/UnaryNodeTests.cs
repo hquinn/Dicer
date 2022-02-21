@@ -30,9 +30,10 @@ public class UnaryNodeTests
 		var roller = RollerFactory.CreateEmptyRoller();
 		var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 		var sut = NodeFactory.CreateUnaryNode(1);
+
 		var expected = new[]
 		{
-			new RollResponse(1, new [] { new Roll(1, 1) }),
+			new RollResponse(1, new[] { new Roll(1, 1) })
 		};
 
 		// Act

@@ -3,7 +3,7 @@
 namespace Dicer.Rounding;
 
 /// <summary>
-/// Will round the number to the nearest integer.
+///     Will round the number to the nearest integer.
 /// </summary>
 public class RoundToNearest : IRoundingStrategy
 {

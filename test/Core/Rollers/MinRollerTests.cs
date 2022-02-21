@@ -87,7 +87,14 @@ public class MinRollerTests
 		[InlineData(-4, -6, 3, 1, -6, 3, 3)]
 		[InlineData(4, -6, 3, -1, -6, 3, -3)]
 		[InlineData(-4, 6, 3, -1, 6, 3, -3)]
-		public void ShouldHandleResultIfNegative(int numDiceParam, int dieSizeParam, int keepParam, int numDiceResult, int dieSizeResult, int keepResult, int result)
+		public void ShouldHandleResultIfNegative(
+			int numDiceParam,
+			int dieSizeParam,
+			int keepParam,
+			int numDiceResult,
+			int dieSizeResult,
+			int keepResult,
+			int result)
 		{
 			// Arrange
 			var numDice = NodeResponseFactory.CreateSimpleResponse(numDiceParam);
@@ -95,7 +102,9 @@ public class MinRollerTests
 			var keep = NodeResponseFactory.CreateSimpleResponse(keepParam);
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = new MinRoller();
-			var expected = new RollResponse(result, Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
+
+			var expected = new RollResponse(result,
+				Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
 
 			// Act
 			var actual = sut.Roll(numDice, dieSize, keep, roundingStrategy);

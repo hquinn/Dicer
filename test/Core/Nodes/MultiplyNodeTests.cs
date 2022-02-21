@@ -33,10 +33,11 @@ public class MultiplyNodeTests
 			var roller = RollerFactory.CreateEmptyRoller();
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = NodeFactory.CreateMultiplyNode(1, 2);
+
 			var expected = new[]
 			{
-				new RollResponse(1, new [] { new Roll(1, 1) }),
-				new RollResponse(2, new[] { new Roll(2, 2) }),
+				new RollResponse(1, new[] { new Roll(1, 1) }),
+				new RollResponse(2, new[] { new Roll(2, 2) })
 			};
 
 			// Act

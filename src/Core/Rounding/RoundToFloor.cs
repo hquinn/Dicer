@@ -3,7 +3,7 @@
 namespace Dicer.Rounding;
 
 /// <summary>
-/// Always rounds the number to the next lowest integer.
+///     Always rounds the number to the next lowest integer.
 /// </summary>
 public class RoundToFloor : IRoundingStrategy
 {

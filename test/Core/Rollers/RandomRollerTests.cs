@@ -40,7 +40,7 @@ public class RandomRollerTests
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1, 2);
 			var sut = new RandomRoller(random);
-			var expected = RollResponseFactory.CreateResponse(result: 4, dieSize: 6, 1, 1, 2);
+			var expected = RollResponseFactory.CreateResponse(4, 6, 1, 1, 2);
 
 			// Act
 			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
@@ -59,7 +59,7 @@ public class RandomRollerTests
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1);
 			var sut = new RandomRoller(random);
-			var expected = RollResponseFactory.CreateResponse(result: 3, dieSize: 6, 1, 1, 1);
+			var expected = RollResponseFactory.CreateResponse(3, 6, 1, 1, 1);
 
 			// Act
 			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
@@ -110,7 +110,14 @@ public class RandomRollerTests
 		[InlineData(-4, -6, 3, 2, -6, 3, 6)]
 		[InlineData(4, -6, 3, -2, -6, 3, -6)]
 		[InlineData(-4, 6, 3, -2, 6, 3, -6)]
-		public void ShouldHandleResultIfNegative(int numDiceParam, int dieSizeParam, int keepParam, int numDiceResult, int dieSizeResult, int keepResult, int result)
+		public void ShouldHandleResultIfNegative(
+			int numDiceParam,
+			int dieSizeParam,
+			int keepParam,
+			int numDiceResult,
+			int dieSizeResult,
+			int keepResult,
+			int result)
 		{
 			// Arrange
 			var numDice = NodeResponseFactory.CreateSimpleResponse(numDiceParam);
@@ -119,7 +126,9 @@ public class RandomRollerTests
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom();
 			var sut = new RandomRoller(random);
-			var expected = new RollResponse(result, Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
+
+			var expected = new RollResponse(result,
+				Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
 
 			// Act
 			var actual = sut.Roll(numDice, dieSize, keep, roundingStrategy);

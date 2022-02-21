@@ -5,7 +5,7 @@ using Dicer.Rounding;
 namespace Dicer.Nodes;
 
 /// <summary>
-/// Node for dividing two <see cref="INode"/> together.
+///     Node for dividing two <see cref="INode" /> together.
 /// </summary>
 public class DivideNode : INode
 {
@@ -21,7 +21,8 @@ public class DivideNode : INode
 	/// <inheritdoc />
 	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
-		return NodeResponse.Divide(_first.Evaluate(roller, roundingStrategy), _second.Evaluate(roller, roundingStrategy), roundingStrategy);
+		return NodeResponse.Divide(_first.Evaluate(roller, roundingStrategy),
+			_second.Evaluate(roller, roundingStrategy), roundingStrategy);
 	}
 
 	public override string ToString()
