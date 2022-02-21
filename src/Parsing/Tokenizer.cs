@@ -1,10 +1,10 @@
-﻿using Dicer.Parser.Exceptions;
-using Dicer.Parser.Tokens;
+﻿using Dicer.Parsing.Exceptions;
+using Dicer.Parsing.Tokens;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Dicer.Parser;
+namespace Dicer.Parsing;
 
 internal static class Tokenizer
 {
@@ -24,48 +24,56 @@ internal static class Tokenizer
 			else if (character == '+')
 			{
 				yield return new AddToken();
+
 				reader.Read();
 			}
 
 			else if (character == '-')
 			{
 				yield return new SubtractToken();
+
 				reader.Read();
 			}
 
 			else if (character == '*')
 			{
 				yield return new MultiplyToken();
+
 				reader.Read();
 			}
 
 			else if (character == '/')
 			{
 				yield return new DivideToken();
+
 				reader.Read();
 			}
 
 			else if (character is 'd' or 'D')
 			{
 				yield return new DiceToken();
+
 				reader.Read();
 			}
 
 			else if (character is 'k' or 'K')
 			{
 				yield return new KeepToken();
+
 				reader.Read();
 			}
 
 			else if (character == '(')
 			{
 				yield return new OpenToken();
+
 				reader.Read();
 			}
 
 			else if (character == ')')
 			{
 				yield return new CloseToken();
+
 				reader.Read();
 			}
 
@@ -74,7 +82,10 @@ internal static class Tokenizer
 				reader.Read();
 			}
 
-			else throw new ParsingException($"Token '{character}' cannot be tokenized.");
+			else
+			{
+				throw new ParsingException($"Token '{character}' cannot be tokenized.");
+			}
 		}
 	}
 

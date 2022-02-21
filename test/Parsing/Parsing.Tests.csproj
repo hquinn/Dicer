@@ -6,8 +6,8 @@
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
     <WarnAsErrors>nullable</WarnAsErrors>
-    <AssemblyName>Dicer.Parser.Tests</AssemblyName>
-    <RootNamespace>Dicer.Parser.Tests</RootNamespace>
+    <AssemblyName>Dicer.Parsing.Tests</AssemblyName>
+    <RootNamespace>Dicer.Parsing.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

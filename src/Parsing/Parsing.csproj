@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <AssemblyName>Dicer.Parser</AssemblyName>
-    <RootNamespace>Dicer.Parser</RootNamespace>
+    <AssemblyName>Dicer.Parsing</AssemblyName>
+    <RootNamespace>Dicer.Parsing</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

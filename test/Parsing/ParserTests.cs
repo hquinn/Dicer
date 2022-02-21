@@ -1,10 +1,10 @@
-﻿using Dicer.Parser.Exceptions;
+﻿using Dicer.Parsing.Exceptions;
 using FluentAssertions;
 using System;
 using Xunit;
-using static Dicer.Parser.Parser;
+using static Dicer.Parsing.Parser;
 
-namespace Dicer.Parser.Tests;
+namespace Dicer.Parsing.Tests;
 
 public class ParserTests
 {
@@ -16,10 +16,12 @@ public class ParserTests
 	[InlineData("1 + 2", "ADD(1,2)")]
 	[InlineData("1 + 2 + 3 + 4 + 6 + 2 + 10", "ADD(ADD(ADD(ADD(ADD(ADD(1,2),3),4),6),2),10)")]
 	[InlineData("1 - 2", "SUBTRACT(1,2)")]
-	[InlineData("1 - 2 - 3 - 4 - 6 - 2 - 10", "SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(1,2),3),4),6),2),10)")]
+	[InlineData("1 - 2 - 3 - 4 - 6 - 2 - 10",
+		"SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(1,2),3),4),6),2),10)")]
 	[InlineData("1 + 2 - 3", "SUBTRACT(ADD(1,2),3)")]
 	[InlineData("1 * 2 * 3", "MULTIPLY(MULTIPLY(1,2),3)")]
-	[InlineData("1 * 2 * 3 * 4 * 6 * 2 * 10", "MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(1,2),3),4),6),2),10)")]
+	[InlineData("1 * 2 * 3 * 4 * 6 * 2 * 10",
+		"MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(1,2),3),4),6),2),10)")]
 	[InlineData("1 * 2 + 3", "ADD(MULTIPLY(1,2),3)")]
 	[InlineData("1 + 2 * 3", "ADD(1,MULTIPLY(2,3))")]
 	[InlineData("1 * 2 + 3 * 4", "ADD(MULTIPLY(1,2),MULTIPLY(3,4))")]
@@ -58,15 +60,18 @@ public class ParserTests
 	[InlineData("1 + 2", "1+1", "REPEAT(ADD(1,2),ADD(1,1))")]
 	[InlineData("1 + 2 + 3 + 4 + 6 + 2 + 10", "2", "REPEAT(ADD(ADD(ADD(ADD(ADD(ADD(1,2),3),4),6),2),10),2)")]
 	[InlineData("1 - 2", "3*2", "REPEAT(SUBTRACT(1,2),MULTIPLY(3,2))")]
-	[InlineData("1 - 2 - 3 - 4 - 6 - 2 - 10", "4d6k3", "REPEAT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(1,2),3),4),6),2),10),DICE(4,6,3))")]
+	[InlineData("1 - 2 - 3 - 4 - 6 - 2 - 10", "4d6k3",
+		"REPEAT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(SUBTRACT(1,2),3),4),6),2),10),DICE(4,6,3))")]
 	[InlineData("1 + 2 - 3", "2", "REPEAT(SUBTRACT(ADD(1,2),3),2)")]
 	[InlineData("1 * 2 * 3", "2", "REPEAT(MULTIPLY(MULTIPLY(1,2),3),2)")]
-	[InlineData("1 * 2 * 3 * 4 * 6 * 2 * 10", "2", "REPEAT(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(1,2),3),4),6),2),10),2)")]
+	[InlineData("1 * 2 * 3 * 4 * 6 * 2 * 10", "2",
+		"REPEAT(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(MULTIPLY(1,2),3),4),6),2),10),2)")]
 	[InlineData("1 * 2 + 3", "2", "REPEAT(ADD(MULTIPLY(1,2),3),2)")]
 	[InlineData("1 + 2 * 3", "2", "REPEAT(ADD(1,MULTIPLY(2,3)),2)")]
 	[InlineData("1 * 2 + 3 * 4", "2", "REPEAT(ADD(MULTIPLY(1,2),MULTIPLY(3,4)),2)")]
 	[InlineData("1 / 2 / 3", "2", "REPEAT(DIVIDE(DIVIDE(1,2),3),2)")]
-	[InlineData("1 / 2 / 3 / 4 / 6 / 2 / 10", "2", "REPEAT(DIVIDE(DIVIDE(DIVIDE(DIVIDE(DIVIDE(DIVIDE(1,2),3),4),6),2),10),2)")]
+	[InlineData("1 / 2 / 3 / 4 / 6 / 2 / 10", "2",
+		"REPEAT(DIVIDE(DIVIDE(DIVIDE(DIVIDE(DIVIDE(DIVIDE(1,2),3),4),6),2),10),2)")]
 	[InlineData("1 / 2 + 3", "2", "REPEAT(ADD(DIVIDE(1,2),3),2)")]
 	[InlineData("1 + 2 / 3", "2", "REPEAT(ADD(1,DIVIDE(2,3)),2)")]
 	[InlineData("1 / 2 + 3 / 4", "2", "REPEAT(ADD(DIVIDE(1,2),DIVIDE(3,4)),2)")]
@@ -83,7 +88,10 @@ public class ParserTests
 	[InlineData("++(1+2)", "2", "REPEAT(ADD(1,2),2)")]
 	[InlineData("4D6K-3+3", "2", "REPEAT(ADD(DICE(4,6,UNARY(3)),3),2)")]
 	[InlineData("--1", "3", "REPEAT(UNARY(UNARY(1)),3)")]
-	public void ShouldConstructRepeatingNodesFromValidInputString(string nodeInput, string repeatingInput, string expected)
+	public void ShouldConstructRepeatingNodesFromValidInputString(
+		string nodeInput,
+		string repeatingInput,
+		string expected)
 	{
 		// Act
 		var actual = Parse(nodeInput, repeatingInput);
