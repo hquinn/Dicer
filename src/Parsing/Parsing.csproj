@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Dicer.Parsing</AssemblyName>
     <RootNamespace>Dicer.Parsing</RootNamespace>
+    <Authors>hquinn</Authors>
+    <Description>Parsing library for the Dicer Core library</Description>
+    <PackageProjectUrl>https://github.com/hquinn/Dicer/</PackageProjectUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

@@ -6,6 +6,10 @@
     <WarnAsErrors>nullable</WarnAsErrors>
     <AssemblyName>Dicer</AssemblyName>
     <RootNamespace>Dicer</RootNamespace>
+    <Authors>hquinn</Authors>
+    <Description>Core logic creating dice expressions</Description>
+    <PackageProjectUrl>https://github.com/hquinn/Dicer/</PackageProjectUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
