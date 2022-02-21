@@ -8,10 +8,4 @@
     <RootNamespace>Dicer</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Nodes\" />
-    <Folder Include="Rollers\" />
-  </ItemGroup>
-
 </Project>

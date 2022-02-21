@@ -11,9 +11,4 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-    <Folder Include="Tokens\" />
-  </ItemGroup>
-
 </Project>
