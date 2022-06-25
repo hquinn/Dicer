@@ -23,5 +23,6 @@ public interface IRoller
 		NodeResponse numDice,
 		NodeResponse dieSize,
 		NodeResponse? keep,
+		NodeResponse? minimum,
 		IRoundingStrategy roundingStrategy);
 }

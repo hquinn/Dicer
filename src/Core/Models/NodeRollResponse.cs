@@ -5,12 +5,14 @@ namespace Dicer.Models;
 
 internal class NodeRollResponse
 {
-	public NodeRollResponse(double result, IRoundingStrategy roundingStrategy)
+	public NodeRollResponse(NodeResponse? result, IRoundingStrategy roundingStrategy)
 	{
-		IsNegative = result < 0;
-		Result = (int)roundingStrategy.Round(Math.Abs(result));
+		var value = result?.Result ?? 0;
+
+		IsNegative = value < 0;
+		Result = (int)roundingStrategy.Round(Math.Abs(value));
 	}
 
 	public int Result { get; }
 	public bool IsNegative { get; }
-};
+}

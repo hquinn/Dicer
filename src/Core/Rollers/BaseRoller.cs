@@ -15,22 +15,25 @@ public abstract class BaseRoller : IRoller
 		NodeResponse numDice,
 		NodeResponse dieSize,
 		NodeResponse? keep,
+		NodeResponse? minimum,
 		IRoundingStrategy roundingStrategy)
 	{
-		var numDiceResult = new NodeRollResponse(numDice.Result, roundingStrategy);
-		var dieSizeResult = new NodeRollResponse(dieSize.Result, roundingStrategy);
+		var numDiceResult = new NodeRollResponse(numDice, roundingStrategy);
+		var dieSizeResult = new NodeRollResponse(dieSize, roundingStrategy);
+		var minimumResult = new NodeRollResponse(minimum, roundingStrategy);
 
-		var rolls = RollDice(numDiceResult, dieSizeResult, roundingStrategy)
+		var rolls = RollDice(numDiceResult, dieSizeResult, minimumResult, roundingStrategy)
 			.PickDiceToKeep(keep, roundingStrategy);
 
 		return RollResponse.CreateResponse(rolls);
 	}
 
-	protected abstract int RollSingleDice(int dieSize, IRoundingStrategy roundingStrategy);
+	protected abstract int RollSingleDice(int dieSize, int minimumValue, IRoundingStrategy roundingStrategy);
 
 	private IEnumerable<Roll> RollDice(
 		NodeRollResponse numDiceResult,
 		NodeRollResponse dieSizeResult,
+		NodeRollResponse minimumResult,
 		IRoundingStrategy roundingStrategy)
 	{
 		var numDiceMultiplier = numDiceResult.IsNegative ? -1 : 1;
@@ -38,7 +41,7 @@ public abstract class BaseRoller : IRoller
 
 		for (var i = 1; i <= numDiceResult.Result; i++)
 		{
-			var roll = RollSingleDice(dieSizeResult.Result, roundingStrategy);
+			var roll = RollSingleDice(dieSizeResult.Result, minimumResult.Result, roundingStrategy);
 
 			if (dieSizeResult.IsNegative)
 			{

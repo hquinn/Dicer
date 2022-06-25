@@ -151,7 +151,34 @@ public static class Parser
 			{
 				Increment(ref token);
 				var khs = ParseUnary(ref token);
-				lhs = new DiceNode(lhs, rhs, khs);
+
+				if (token?.Value is MinimumToken)
+				{
+					Increment(ref token);
+					var mhs = ParseUnary(ref token);
+					lhs = new DiceNode(lhs, rhs, khs, mhs);
+				}
+				else
+				{
+					lhs = new DiceNode(lhs, rhs, khs);
+				}
+			}
+
+			else if (token?.Value is MinimumToken)
+			{
+				Increment(ref token);
+				var mhs = ParseUnary(ref token);
+
+				if (token?.Value is KeepToken)
+				{
+					Increment(ref token);
+					var khs = ParseUnary(ref token);
+					lhs = new DiceNode(lhs, rhs, khs, mhs);
+				}
+				else
+				{
+					lhs = new DiceNode(lhs, rhs, null, mhs);
+				}
 			}
 
 			else if (currentToken is DiceToken)

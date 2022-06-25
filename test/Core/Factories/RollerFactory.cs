@@ -11,8 +11,10 @@ public static class RollerFactory
 	public static IRoller CreateRoller(int numDice, int dieSize)
 	{
 		var mockRoller = Substitute.For<IRoller>();
+
 		mockRoller
-			.Roll(Arg.Any<NodeResponse>(), Arg.Any<NodeResponse>(), Arg.Any<NodeResponse?>(), Arg.Any<IRoundingStrategy>())
+			.Roll(Arg.Any<NodeResponse>(), Arg.Any<NodeResponse>(), Arg.Any<NodeResponse?>(), Arg.Any<NodeResponse?>(),
+				Arg.Any<IRoundingStrategy>())
 			.Returns(new RollResponse(numDice * dieSize, Enumerable.Repeat<Roll>(new(dieSize, dieSize), numDice)));
 
 		return mockRoller;

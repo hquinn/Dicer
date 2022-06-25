@@ -63,6 +63,13 @@ internal static class Tokenizer
 				reader.Read();
 			}
 
+			else if (character is 'm' or 'M')
+			{
+				yield return new MinimumToken();
+
+				reader.Read();
+			}
+
 			else if (character == '(')
 			{
 				yield return new OpenToken();

@@ -18,12 +18,13 @@ public class MaxRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			NodeResponse? keep = null;
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = new MaxRoller();
 			var expected = new RollResponse(18, Enumerable.Repeat(new Roll(6, 6), 3));
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -36,12 +37,13 @@ public class MaxRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(4);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			var keep = NodeResponseFactory.CreateSimpleResponse(3);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = new MaxRoller();
 			var expected = new RollResponse(18, Enumerable.Repeat(new Roll(6, 6), 3));
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -54,12 +56,13 @@ public class MaxRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			var keep = NodeResponseFactory.CreateSimpleResponse(4);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = new MaxRoller();
 			var expected = new RollResponse(18, Enumerable.Repeat(new Roll(6, 6), 3));
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -72,12 +75,13 @@ public class MaxRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(4);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			var keep = NodeResponseFactory.CreateSimpleResponse(-3);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = new MaxRoller();
 			var expected = new RollResponse(18, Enumerable.Repeat(new Roll(6, 6), 3));
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -100,6 +104,7 @@ public class MaxRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(numDiceParam);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(dieSizeParam);
 			var keep = NodeResponseFactory.CreateSimpleResponse(keepParam);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = new MaxRoller();
 
@@ -107,10 +112,29 @@ public class MaxRollerTests
 				Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
 
 			// Act
-			var actual = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var actual = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			actual.Should().BeEquivalentTo(expected);
+		}
+
+		[Fact]
+		public void ShouldReturnMaxRollsEvenWhenMinimumIsPresent()
+		{
+			// Arrange
+			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
+			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
+			NodeResponse? keep = null;
+			var minimum = NodeResponseFactory.CreateSimpleResponse(3);
+			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
+			var sut = new MaxRoller();
+			var expected = new RollResponse(18, Enumerable.Repeat(new Roll(6, 6), 3));
+
+			// Act
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
+
+			// Assert
+			result.Should().BeEquivalentTo(expected);
 		}
 	}
 }

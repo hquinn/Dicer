@@ -7,8 +7,8 @@ namespace Dicer.Rollers;
 /// </summary>
 public class MinRoller : BaseRoller
 {
-	protected override int RollSingleDice(int dieSize, IRoundingStrategy roundingStrategy)
+	protected override int RollSingleDice(int dieSize, int minimum, IRoundingStrategy roundingStrategy)
 	{
-		return 1;
+		return minimum > 0 && minimum <= dieSize ? minimum : 1;
 	}
 }

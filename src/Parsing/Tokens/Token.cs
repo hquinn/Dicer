@@ -14,5 +14,6 @@ internal record MultiplyToken() : Token("*");
 internal record DivideToken() : Token("/");
 internal record DiceToken() : Token("D");
 internal record KeepToken() : Token("K");
+internal record MinimumToken() : Token("M");
 internal record OpenToken() : Token("(");
 internal record CloseToken() : Token(")");

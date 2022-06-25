@@ -18,13 +18,14 @@ public class RandomRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			NodeResponse? keep = null;
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(2);
 			var sut = new RandomRoller(random);
 			var expected = new RollResponse(6, Enumerable.Repeat(new Roll(2, 6), 3));
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -37,13 +38,14 @@ public class RandomRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(4);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			var keep = NodeResponseFactory.CreateSimpleResponse(3);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1, 2);
 			var sut = new RandomRoller(random);
 			var expected = RollResponseFactory.CreateResponse(4, 6, 1, 1, 2);
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -56,13 +58,14 @@ public class RandomRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			var keep = NodeResponseFactory.CreateSimpleResponse(4);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1);
 			var sut = new RandomRoller(random);
 			var expected = RollResponseFactory.CreateResponse(3, 6, 1, 1, 1);
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -75,13 +78,14 @@ public class RandomRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(4);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			var keep = NodeResponseFactory.CreateSimpleResponse(-3);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1, 2);
 			var sut = new RandomRoller(random);
 			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -94,13 +98,14 @@ public class RandomRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
 			var keep = NodeResponseFactory.CreateSimpleResponse(-4);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom(1, 1, 1);
 			var sut = new RandomRoller(random);
 			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
 
 			// Act
-			var result = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			result.Should().BeEquivalentTo(expected);
@@ -123,6 +128,7 @@ public class RandomRollerTests
 			var numDice = NodeResponseFactory.CreateSimpleResponse(numDiceParam);
 			var dieSize = NodeResponseFactory.CreateSimpleResponse(dieSizeParam);
 			var keep = NodeResponseFactory.CreateSimpleResponse(keepParam);
+			NodeResponse? minimum = null;
 			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var random = RandomFactory.CreateRandom();
 			var sut = new RandomRoller(random);
@@ -131,10 +137,70 @@ public class RandomRollerTests
 				Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
 
 			// Act
-			var actual = sut.Roll(numDice, dieSize, keep, roundingStrategy);
+			var actual = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
 
 			// Assert
 			actual.Should().BeEquivalentTo(expected);
+		}
+
+		[Fact]
+		public void ShouldReturnListOfParameterMinRolls()
+		{
+			// Arrange
+			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
+			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
+			NodeResponse? keep = null;
+			var minimum = NodeResponseFactory.CreateSimpleResponse(3);
+			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
+			var random = RandomFactory.CreateRandom(2);
+			var sut = new RandomRoller(random);
+			var expected = new RollResponse(9, Enumerable.Repeat(new Roll(3, 6), 3));
+
+			// Act
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
+
+			// Assert
+			result.Should().BeEquivalentTo(expected);
+		}
+
+		[Fact]
+		public void ShouldNotReturnListOfParameterMinRollsWhenOtherRollsAreHigher()
+		{
+			// Arrange
+			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
+			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
+			NodeResponse? keep = null;
+			var minimum = NodeResponseFactory.CreateSimpleResponse(1);
+			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
+			var random = RandomFactory.CreateRandom(2);
+			var sut = new RandomRoller(random);
+			var expected = new RollResponse(6, Enumerable.Repeat(new Roll(2, 6), 3));
+
+			// Act
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
+
+			// Assert
+			result.Should().BeEquivalentTo(expected);
+		}
+
+		[Fact]
+		public void ShouldNotReturnListOfParameterMinRollsWhenMinIsGreaterThanDieSize()
+		{
+			// Arrange
+			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
+			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
+			NodeResponse? keep = null;
+			var minimum = NodeResponseFactory.CreateSimpleResponse(7);
+			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
+			var random = RandomFactory.CreateRandom(2);
+			var sut = new RandomRoller(random);
+			var expected = new RollResponse(6, Enumerable.Repeat(new Roll(2, 6), 3));
+
+			// Act
+			var result = sut.Roll(numDice, dieSize, keep, minimum, roundingStrategy);
+
+			// Assert
+			result.Should().BeEquivalentTo(expected);
 		}
 	}
 }

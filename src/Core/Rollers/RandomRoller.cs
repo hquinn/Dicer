@@ -20,8 +20,10 @@ public class RandomRoller : BaseRoller
 		_random = random;
 	}
 
-	protected override int RollSingleDice(int dieSize, IRoundingStrategy roundingStrategy)
+	protected override int RollSingleDice(int dieSize, int minimum, IRoundingStrategy roundingStrategy)
 	{
-		return _random.RollDice(dieSize);
+		var roll = _random.RollDice(dieSize);
+
+		return roll < minimum && minimum <= dieSize ? minimum : roll;
 	}
 }

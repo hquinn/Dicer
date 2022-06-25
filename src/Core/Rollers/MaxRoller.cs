@@ -7,7 +7,7 @@ namespace Dicer.Rollers;
 /// </summary>
 public class MaxRoller : BaseRoller
 {
-	protected override int RollSingleDice(int dieSize, IRoundingStrategy roundingStrategy)
+	protected override int RollSingleDice(int dieSize, int minimum, IRoundingStrategy roundingStrategy)
 	{
 		return dieSize;
 	}
