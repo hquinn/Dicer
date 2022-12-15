@@ -1,12 +1,9 @@
-﻿using Dicer.Models;
-using Dicer.Nodes;
-using Dicer.Rollers;
-using Dicer.Rounding;
+﻿using Dicer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static Dicer.Parsing.Parser;
+using static Dicer.Parser;
 
 BasicArithmetic();
 DiceExample();

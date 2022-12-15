@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Dicer.Randomizer;
+namespace Dicer;
 
 /// <summary>
 ///     Default implementation of <see cref="IRandom" />, which uses <see cref="RandomNumberGenerator" /> under the hood.

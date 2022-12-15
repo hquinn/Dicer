@@ -1,6 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
-using static Dicer.Parsing.Parser;
 
 namespace Parsing.Benchmarks;
 

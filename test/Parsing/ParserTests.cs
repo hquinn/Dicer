@@ -1,10 +1,9 @@
-﻿using Dicer.Parsing.Exceptions;
-using FluentAssertions;
+﻿using FluentAssertions;
 using System;
 using Xunit;
-using static Dicer.Parsing.Parser;
+using static Dicer.Parser;
 
-namespace Dicer.Parsing.Tests;
+namespace Dicer.Tests;
 
 public class ParserTests
 {

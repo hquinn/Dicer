@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dicer.Parsing.Exceptions;
+namespace Dicer;
 
 public class ParsingException : Exception
 {

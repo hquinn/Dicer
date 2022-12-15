@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Dicer.Models;
+namespace Dicer;
 
 /// <summary>
 ///     Final result for a roll.

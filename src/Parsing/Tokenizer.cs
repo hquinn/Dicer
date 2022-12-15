@@ -1,10 +1,8 @@
-﻿using Dicer.Parsing.Exceptions;
-using Dicer.Parsing.Tokens;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Dicer.Parsing;
+namespace Dicer;
 
 internal static class Tokenizer
 {

@@ -1,5 +1,4 @@
-﻿using Dicer.Randomizer;
-using Dicer.Tests.Helpers;
+﻿using Dicer.Tests.Helpers;
 using NSubstitute;
 using System.Linq;
 

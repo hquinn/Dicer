@@ -1,4 +1,4 @@
-﻿namespace Dicer.Parsing.Tokens;
+﻿namespace Dicer;
 
 internal abstract record Token(string Value);
 

@@ -1,9 +1,6 @@
-﻿using Dicer.Models;
-using Dicer.Rollers;
-using Dicer.Rounding;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Dicer.Nodes;
+namespace Dicer;
 
 /// <summary>
 ///     Represents a node in an expression tree, used for calculating mathematical expressions.

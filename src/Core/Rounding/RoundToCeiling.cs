@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dicer.Rounding;
+namespace Dicer;
 
 /// <summary>
 ///     Always rounds the number to the next highest integer.

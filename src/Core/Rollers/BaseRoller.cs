@@ -1,9 +1,6 @@
-﻿using Dicer.Helpers;
-using Dicer.Models;
-using Dicer.Rounding;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Dicer.Rollers;
+namespace Dicer;
 
 /// <summary>
 ///     Base class for rolling dice

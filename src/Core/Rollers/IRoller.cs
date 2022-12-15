@@ -1,7 +1,4 @@
-﻿using Dicer.Models;
-using Dicer.Rounding;
-
-namespace Dicer.Rollers;
+﻿namespace Dicer;
 
 /// <summary>
 ///     Interface for implementing different rolling strategies.

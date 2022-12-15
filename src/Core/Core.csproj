@@ -4,12 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <WarnAsErrors>nullable</WarnAsErrors>
-    <AssemblyName>Dicer</AssemblyName>
+    <AssemblyName>Dicer.Core</AssemblyName>
     <RootNamespace>Dicer</RootNamespace>
     <Authors>hquinn</Authors>
     <Description>Core logic creating dice expressions</Description>
     <PackageProjectUrl>https://github.com/hquinn/Dicer/</PackageProjectUrl>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/hquinn/Dicer/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>

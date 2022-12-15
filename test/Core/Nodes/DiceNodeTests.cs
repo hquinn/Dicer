@@ -1,5 +1,4 @@
-﻿using Dicer.Models;
-using Dicer.Tests.Factories;
+﻿using Dicer.Tests.Factories;
 using FluentAssertions;
 using System.Linq;
 using Xunit;

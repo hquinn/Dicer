@@ -1,7 +1,4 @@
-﻿using Dicer.Randomizer;
-using Dicer.Rounding;
-
-namespace Dicer.Rollers;
+﻿namespace Dicer;
 
 /// <summary>
 ///     Rolls dice using a random roll for each die.

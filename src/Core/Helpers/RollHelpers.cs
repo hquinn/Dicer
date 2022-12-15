@@ -1,10 +1,8 @@
-﻿using Dicer.Models;
-using Dicer.Rounding;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dicer.Helpers;
+namespace Dicer;
 
 internal static class RollHelpers
 {

@@ -1,10 +1,7 @@
-﻿using Dicer.Nodes;
-using Dicer.Parsing.Exceptions;
-using Dicer.Parsing.Tokens;
-using System.Collections.Generic;
-using static Dicer.Parsing.Tokenizer;
+﻿using System.Collections.Generic;
+using static Dicer.Tokenizer;
 
-namespace Dicer.Parsing;
+namespace Dicer;
 
 public static class Parser
 {

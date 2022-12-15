@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dicer.Rounding;
+namespace Dicer;
 
 /// <summary>
 ///     Will round the number to the nearest integer.

@@ -1,4 +1,4 @@
-﻿namespace Dicer.Rounding;
+﻿namespace Dicer;
 
 /// <summary>
 /// Interface for implementing different rounding strategies.

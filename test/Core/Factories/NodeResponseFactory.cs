@@ -1,6 +1,4 @@
-﻿using Dicer.Models;
-
-namespace Dicer.Tests.Factories;
+﻿namespace Dicer.Tests.Factories;
 
 public class NodeResponseFactory
 {

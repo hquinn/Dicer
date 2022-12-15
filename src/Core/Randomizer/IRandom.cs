@@ -1,4 +1,4 @@
-﻿namespace Dicer.Randomizer;
+﻿namespace Dicer;
 
 /// <summary>
 ///     Interface for implementing random number generators for rolling dice.

@@ -1,8 +1,6 @@
-﻿using Dicer.Helpers;
-using Dicer.Rounding;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Dicer.Models;
+namespace Dicer;
 
 /// <summary>
 ///     Represents the result from calculating a <see cref="Dicer.Nodes.INode" />, including the <paramref name="Result" />

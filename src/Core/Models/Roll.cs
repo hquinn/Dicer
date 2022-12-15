@@ -1,4 +1,4 @@
-﻿namespace Dicer.Models;
+﻿namespace Dicer;
 
 /// <summary>
 ///     Represents a single roll result.

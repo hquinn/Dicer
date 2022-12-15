@@ -1,5 +1,4 @@
-﻿using Dicer.Models;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Dicer.Tests.Factories;
 

@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <AssemblyName>Dicer.Parsing</AssemblyName>
-    <RootNamespace>Dicer.Parsing</RootNamespace>
+    <RootNamespace>Dicer</RootNamespace>
     <Authors>hquinn</Authors>
     <Description>Parsing library for the Dicer Core library</Description>
     <PackageProjectUrl>https://github.com/hquinn/Dicer/</PackageProjectUrl>
