@@ -2,7 +2,7 @@
 
 namespace Dicer;
 
-public class RepeatingNode : IRepeatingNode
+internal class RepeatingNode : IRepeatingNode
 {
 	private readonly INode _node;
 	private readonly INode _repeat;

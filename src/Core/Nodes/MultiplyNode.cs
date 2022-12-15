@@ -3,7 +3,7 @@
 /// <summary>
 ///     Node for multiplying two <see cref="INode" /> together.
 /// </summary>
-public class MultiplyNode : INode
+internal class MultiplyNode : INode
 {
 	private readonly INode _first;
 	private readonly INode _second;

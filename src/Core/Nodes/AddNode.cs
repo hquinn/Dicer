@@ -1,9 +1,11 @@
-﻿namespace Dicer;
+﻿using System.Runtime.CompilerServices;
+
+namespace Dicer;
 
 /// <summary>
 ///     Node for adding two <see cref="INode" /> together.
 /// </summary>
-public class AddNode : INode
+internal class AddNode : INode
 {
 	private readonly INode _first;
 	private readonly INode _second;

@@ -5,46 +5,20 @@ using System.Linq;
 using System.Text;
 using static Dicer.Parser;
 
-BasicArithmetic();
-DiceExample();
-KeepLowestExample();
 BasicParsingExample();
 ComplexParsingExample();
 BasicRepeatingNodeExample();
 
-static void BasicArithmetic()
-{
-	var node = new AddNode(new NumberNode(1), new MultiplyNode(new NumberNode(2), new NumberNode(3)));
-	var response = node.Evaluate(new MinRoller(), new NoRounding());
-	Console.WriteLine(Format(response, "BasicArithmetic"));
-}
-
-static void DiceExample()
-{
-	var node = new AddNode(new DiceNode(new NumberNode(4), new NumberNode(6), new NumberNode(3)),
-		new DiceNode(new NumberNode(2), new NumberNode(10)));
-
-	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
-	Console.WriteLine(Format(response, "DiceExample"));
-}
-
-static void KeepLowestExample()
-{
-	var node = new DiceNode(new NumberNode(4), new NumberNode(6), new NumberNode(-3));
-	var response = node.Evaluate(new RandomRoller(), new RoundToNearest());
-	Console.WriteLine(Format(response, "KeepLowestExample"));
-}
-
 static void BasicParsingExample()
 {
-	var node = Parse("4D6K3 + 2d10");
+	var node = Parse("4D6K3 + 2d10m2");
 	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
 	Console.WriteLine(Format(response, "BasicParsingExample"));
 }
 
 static void ComplexParsingExample()
 {
-	var node = Parse("4D(5/(1+2))K-3 +- (5*(1+2))d10");
+	var node = Parse("4D(5/(1+2))K-3 +- (5*(1+2))d10m(1d2k1)");
 	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
 	Console.WriteLine(Format(response, "ComplexParsingExample"));
 }

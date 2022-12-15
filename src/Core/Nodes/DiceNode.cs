@@ -3,7 +3,7 @@
 /// <summary>
 ///     Node for representing dice.
 /// </summary>
-public class DiceNode : INode
+internal class DiceNode : INode
 {
 	private readonly INode _dieSize;
 	private readonly INode? _keep;

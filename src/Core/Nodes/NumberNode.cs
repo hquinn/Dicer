@@ -3,7 +3,7 @@
 /// <summary>
 ///     Node that represents a number.
 /// </summary>
-public class NumberNode : INode
+internal class NumberNode : INode
 {
 	private readonly double _number;
 

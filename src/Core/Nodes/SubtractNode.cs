@@ -3,7 +3,7 @@
 /// <summary>
 ///     Node for subtracting two <see cref="INode" /> together.
 /// </summary>
-public class SubtractNode : INode
+internal class SubtractNode : INode
 {
 	private readonly INode _first;
 	private readonly INode _second;

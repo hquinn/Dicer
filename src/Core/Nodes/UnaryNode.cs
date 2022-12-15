@@ -3,7 +3,7 @@
 /// <summary>
 ///     Node that represents the unary of an <see cref="INode" />.
 /// </summary>
-public class UnaryNode : INode
+internal class UnaryNode : INode
 {
 	private readonly INode _node;
 

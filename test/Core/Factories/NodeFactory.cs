@@ -4,7 +4,7 @@ namespace Dicer.Tests.Factories;
 
 public static class NodeFactory
 {
-	public static AddNode CreateAddNode(double first, double second)
+	internal static AddNode CreateAddNode(double first, double second)
 	{
 		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
 		var mockFirst = Substitute.For<INode>();
@@ -17,7 +17,7 @@ public static class NodeFactory
 		return new(mockFirst, mockSecond);
 	}
 
-	public static SubtractNode CreateSubtractNode(double first, double second)
+   internal static SubtractNode CreateSubtractNode(double first, double second)
 	{
 		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
 		var mockFirst = Substitute.For<INode>();
@@ -30,7 +30,7 @@ public static class NodeFactory
 		return new(mockFirst, mockSecond);
 	}
 
-	public static MultiplyNode CreateMultiplyNode(double first, double second)
+   internal static MultiplyNode CreateMultiplyNode(double first, double second)
 	{
 		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
 		var mockFirst = Substitute.For<INode>();
@@ -43,7 +43,7 @@ public static class NodeFactory
 		return new(mockFirst, mockSecond);
 	}
 
-	public static DivideNode CreateDivideNode(double first, double second)
+   internal static DivideNode CreateDivideNode(double first, double second)
 	{
 		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
 		var mockFirst = Substitute.For<INode>();
@@ -56,7 +56,7 @@ public static class NodeFactory
 		return new(mockFirst, mockSecond);
 	}
 
-	public static DiceNode CreateDiceNode(int numDice, int dieSize)
+   internal static DiceNode CreateDiceNode(int numDice, int dieSize)
 	{
 		var mockNumDice = Substitute.For<INode>();
 		mockNumDice.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(numDice));
@@ -67,7 +67,7 @@ public static class NodeFactory
 		return new(mockNumDice, mockDieSize);
 	}
 
-	public static DiceNode CreateDiceNodeWithRolls(int numDice, int dieSize)
+   internal static DiceNode CreateDiceNodeWithRolls(int numDice, int dieSize)
 	{
 		var mockNumDice = Substitute.For<INode>();
 		mockNumDice.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(numDice, new[] { new RollResponse(3, new[] { new Roll(3, 6) }) }));
@@ -78,7 +78,7 @@ public static class NodeFactory
 		return new(mockNumDice, mockDieSize);
 	}
 
-	public static UnaryNode CreateUnaryNode(double node)
+   internal static UnaryNode CreateUnaryNode(double node)
 	{
 		var nodeRolls = new[] { new RollResponse((int)node, new[] { new Roll((int)node, (int)node) }) };
 		var mockNode = Substitute.For<INode>();

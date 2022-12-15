@@ -15,4 +15,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Dicer.Tests" />
+    <InternalsVisibleTo Include="Dicer.Parsing" />
+  </ItemGroup>
+
 </Project>

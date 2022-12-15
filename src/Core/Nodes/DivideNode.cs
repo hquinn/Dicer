@@ -3,7 +3,7 @@
 /// <summary>
 ///     Node for dividing two <see cref="INode" /> together.
 /// </summary>
-public class DivideNode : INode
+internal class DivideNode : INode
 {
 	private readonly INode _first;
 	private readonly INode _second;
