@@ -5,7 +5,7 @@ namespace Dicer;
 /// <summary>
 ///     Base class for rolling dice
 /// </summary>
-public abstract class BaseRoller : IRoller
+internal abstract class BaseRoller : IRoller
 {
 	/// <inheritdoc />
 	public RollResponse Roll(

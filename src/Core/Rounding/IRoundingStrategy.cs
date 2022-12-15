@@ -3,7 +3,7 @@
 /// <summary>
 /// Interface for implementing different rounding strategies.
 /// </summary>
-public interface IRoundingStrategy
+internal interface IRoundingStrategy
 {
 	/// <summary>
 	/// Rounds the value using the specified strategy.

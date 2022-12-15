@@ -3,7 +3,7 @@
 /// <summary>
 /// Performs no rounding.
 /// </summary>
-public class NoRounding : IRoundingStrategy
+internal class NoRounding : IRoundingStrategy
 {
 	/// <inheritdoc />
 	public double Round(double number)

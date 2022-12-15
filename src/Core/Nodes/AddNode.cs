@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Dicer;
+﻿namespace Dicer;
 
 /// <summary>
 ///     Node for adding two <see cref="INode" /> together.

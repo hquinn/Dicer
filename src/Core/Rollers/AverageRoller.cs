@@ -3,7 +3,7 @@
 /// <summary>
 ///     Rolls dice using the average roll for each die.
 /// </summary>
-public class AverageRoller : BaseRoller
+internal class AverageRoller : BaseRoller
 {
 	protected override int RollSingleDice(int dieSize, int minimum, IRoundingStrategy roundingStrategy)
 	{

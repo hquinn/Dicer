@@ -3,7 +3,7 @@
 /// <summary>
 ///     Interface for implementing random number generators for rolling dice.
 /// </summary>
-public interface IRandom
+internal interface IRandom
 {
 	/// <summary>
 	///     Generates a random number in a format most suitable for dice rolls.

@@ -3,7 +3,7 @@
 /// <summary>
 ///     Rolls dice using a random roll for each die.
 /// </summary>
-public class RandomRoller : BaseRoller
+internal class RandomRoller : BaseRoller
 {
 	private readonly IRandom _random;
 

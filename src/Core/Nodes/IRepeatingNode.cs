@@ -6,7 +6,7 @@ namespace Dicer;
 ///     Represents a node in an expression tree, used for calculating mathematical expressions.
 ///     This node is able to repeat the calculation for a list of <see cref="NodeResponse" />.
 /// </summary>
-public interface IRepeatingNode
+internal interface IRepeatingNode
 {
 	/// <summary>
 	///     Calculates the node multiple times.

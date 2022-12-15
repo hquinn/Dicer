@@ -3,7 +3,7 @@
 /// <summary>
 ///     Represents a node in an expression tree, used for calculating mathematical expressions.
 /// </summary>
-public interface INode
+internal interface INode
 {
 	/// <summary>
 	///     Calculates the node.

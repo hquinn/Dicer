@@ -3,7 +3,7 @@
 /// <summary>
 ///     Interface for implementing different rolling strategies.
 /// </summary>
-public interface IRoller
+internal interface IRoller
 {
 	/// <summary>
 	///     Rolls dice using the specified strategy.

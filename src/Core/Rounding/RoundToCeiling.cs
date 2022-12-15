@@ -5,7 +5,7 @@ namespace Dicer;
 /// <summary>
 ///     Always rounds the number to the next highest integer.
 /// </summary>
-public class RoundToCeiling : IRoundingStrategy
+internal class RoundToCeiling : IRoundingStrategy
 {
 	/// <inheritdoc />
 	public double Round(double number)

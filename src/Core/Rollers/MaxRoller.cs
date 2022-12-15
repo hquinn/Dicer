@@ -3,7 +3,7 @@
 /// <summary>
 ///     Rolls dice using the max roll for each die.
 /// </summary>
-public class MaxRoller : BaseRoller
+internal class MaxRoller : BaseRoller
 {
 	protected override int RollSingleDice(int dieSize, int minimum, IRoundingStrategy roundingStrategy)
 	{

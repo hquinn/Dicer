@@ -5,7 +5,7 @@ namespace Dicer;
 /// <summary>
 ///     Will round the number to the nearest integer.
 /// </summary>
-public class RoundToNearest : IRoundingStrategy
+internal class RoundToNearest : IRoundingStrategy
 {
 	/// <inheritdoc />
 	public double Round(double number)
