@@ -3,26 +3,18 @@
 /// <summary>
 ///     Node for subtracting two <see cref="INode" /> together.
 /// </summary>
-internal class SubtractNode : INode
+internal record SubtractNode(BaseNode First, BaseNode Second) : BaseNode
 {
-	private readonly INode _first;
-	private readonly INode _second;
-
-	public SubtractNode(INode first, INode second)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
-		_first = first;
-		_second = second;
-	}
+		var firstEval = First.Evaluate(roller, roundingStrategy);
+		var secondEval = Second.Evaluate(roller, roundingStrategy);
 
-	/// <inheritdoc />
-	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-	{
-		return NodeResponse.Minus(_first.Evaluate(roller, roundingStrategy), _second.Evaluate(roller, roundingStrategy),
-			roundingStrategy);
+		return NodeResponse.Minus(firstEval, secondEval, roundingStrategy);
 	}
 
 	public override string ToString()
 	{
-		return $"SUBTRACT({_first},{_second})";
+		return $"SUBTRACT({First},{Second})";
 	}
 }

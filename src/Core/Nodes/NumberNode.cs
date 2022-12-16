@@ -3,23 +3,15 @@
 /// <summary>
 ///     Node that represents a number.
 /// </summary>
-internal class NumberNode : INode
+internal record NumberNode(double Number) : BaseNode
 {
-	private readonly double _number;
-
-	public NumberNode(double number)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
-		_number = number;
-	}
-
-	/// <inheritdoc />
-	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-	{
-		return new(roundingStrategy.Round(_number));
+		return new(roundingStrategy.Round(Number));
 	}
 
 	public override string ToString()
 	{
-		return $"{_number}";
+		return $"{Number}";
 	}
 }

@@ -3,28 +3,14 @@
 /// <summary>
 ///     Node for representing dice.
 /// </summary>
-internal class DiceNode : INode
+internal record DiceNode(BaseNode NumDice, BaseNode DieSize, BaseNode? Keep = null, BaseNode? Minimum = null) : BaseNode
 {
-	private readonly INode _dieSize;
-	private readonly INode? _keep;
-	private readonly INode? _minimum;
-	private readonly INode _numDice;
-
-	public DiceNode(INode numDice, INode dieSize, INode? keep = null, INode? minimum = null)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
-		_numDice = numDice;
-		_dieSize = dieSize;
-		_keep = keep;
-		_minimum = minimum;
-	}
-
-	/// <inheritdoc />
-	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-	{
-		var numDiceResponse = _numDice.Evaluate(roller, roundingStrategy);
-		var dieSizeResponse = _dieSize.Evaluate(roller, roundingStrategy);
-		var keepResponse = _keep?.Evaluate(roller, roundingStrategy);
-		var minimumResponse = _minimum?.Evaluate(roller, roundingStrategy);
+		var numDiceResponse = NumDice.Evaluate(roller, roundingStrategy);
+		var dieSizeResponse = DieSize.Evaluate(roller, roundingStrategy);
+		var keepResponse = Keep?.Evaluate(roller, roundingStrategy);
+		var minimumResponse = Minimum?.Evaluate(roller, roundingStrategy);
 
 		var rollResult = roller.Roll(numDiceResponse, dieSizeResponse, keepResponse, minimumResponse, roundingStrategy);
 
@@ -36,9 +22,9 @@ internal class DiceNode : INode
 
 	public override string ToString()
 	{
-		var keep = _keep is not null ? $",{_keep}" : ",";
-		var minimum = _minimum is not null ? $",{_minimum}" : ",";
+		var keep = Keep is not null ? $",{Keep}" : ",";
+		var minimum = Minimum is not null ? $",{Minimum}" : ",";
 
-		return $"DICE({_numDice},{_dieSize}{keep}{minimum})";
+		return $"DICE({NumDice},{DieSize}{keep}{minimum})";
 	}
 }

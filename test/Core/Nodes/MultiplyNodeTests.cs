@@ -14,12 +14,10 @@ public class MultiplyNodeTests
 		public void ShouldReturnMultiplicationOfPassedInNodes(double first, double second, double expected)
 		{
 			// Arrange
-			var roller = RollerFactory.CreateEmptyRoller();
-			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = NodeFactory.CreateMultiplyNode(first, second);
 
 			// Act
-			var evaluation = sut.Evaluate(roller, roundingStrategy);
+			var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToCeiling);
 
 			// Assert
 			evaluation.Result.Should().Be(expected);
@@ -29,8 +27,6 @@ public class MultiplyNodeTests
 		public void ShouldReturnRollsAlongWithOtherNodes()
 		{
 			// Arrange
-			var roller = RollerFactory.CreateEmptyRoller();
-			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = NodeFactory.CreateMultiplyNode(1, 2);
 
 			var expected = new[]
@@ -40,7 +36,7 @@ public class MultiplyNodeTests
 			};
 
 			// Act
-			var evaluation = sut.Evaluate(roller, roundingStrategy);
+			var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
 
 			// Assert
 			evaluation.RollResponses.Should().BeEquivalentTo(expected);
@@ -50,13 +46,11 @@ public class MultiplyNodeTests
 		public void ShouldRoundNodesBasedOnRoundingStrategy()
 		{
 			// Arrange
-			var roller = RollerFactory.CreateEmptyRoller();
-			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = NodeFactory.CreateMultiplyNode(3.33, 2);
 			var expected = 7;
 
 			// Act
-			var evaluation = sut.Evaluate(roller, roundingStrategy);
+			var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToCeiling);
 
 			// Assert
 			evaluation.Result.Should().Be(expected);

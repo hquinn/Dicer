@@ -3,23 +3,15 @@
 /// <summary>
 ///     Node that represents the unary of an <see cref="INode" />.
 /// </summary>
-internal class UnaryNode : INode
+internal record UnaryNode(BaseNode Node) : BaseNode
 {
-	private readonly INode _node;
-
-	public UnaryNode(INode node)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
-		_node = node;
-	}
-
-	/// <inheritdoc />
-	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-	{
-		return NodeResponse.Unary(_node.Evaluate(roller, roundingStrategy), roundingStrategy);
+		return NodeResponse.Unary(Node.Evaluate(roller, roundingStrategy), roundingStrategy);
 	}
 
 	public override string ToString()
 	{
-		return $"UNARY({_node})";
+		return $"UNARY({Node})";
 	}
 }

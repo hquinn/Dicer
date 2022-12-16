@@ -18,6 +18,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Dicer.Tests" />
     <InternalsVisibleTo Include="Dicer.Parsing" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 
 </Project>

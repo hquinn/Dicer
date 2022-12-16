@@ -44,7 +44,7 @@ public static class Parser
 		return new RepeatingNode(node, repeat);
 	}
 
-	private static INode ParseAddSubtract(ref LinkedListNode<Token>? token)
+	private static BaseNode ParseAddSubtract(ref LinkedListNode<Token>? token)
 	{
 		var lhs = ParseMultiplyDivide(ref token);
 
@@ -83,7 +83,7 @@ public static class Parser
 		return lhs;
 	}
 
-	private static INode ParseMultiplyDivide(ref LinkedListNode<Token>? token)
+	private static BaseNode ParseMultiplyDivide(ref LinkedListNode<Token>? token)
 	{
 		var lhs = ParseDice(ref token);
 
@@ -122,7 +122,7 @@ public static class Parser
 		return lhs;
 	}
 
-	private static INode ParseDice(ref LinkedListNode<Token>? token)
+	private static BaseNode ParseDice(ref LinkedListNode<Token>? token)
 	{
 		var lhs = ParseUnary(ref token);
 
@@ -187,7 +187,7 @@ public static class Parser
 		return lhs;
 	}
 
-	private static INode ParseUnary(ref LinkedListNode<Token>? token)
+	private static BaseNode ParseUnary(ref LinkedListNode<Token>? token)
 	{
 		while (token is not null)
 		{
@@ -216,7 +216,7 @@ public static class Parser
 		return ParseLeaf(ref token);
 	}
 
-	private static INode ParseLeaf(ref LinkedListNode<Token>? token)
+	private static BaseNode ParseLeaf(ref LinkedListNode<Token>? token)
 	{
 		if (token?.Value is NumberToken number)
 		{

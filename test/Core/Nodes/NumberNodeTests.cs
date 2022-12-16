@@ -1,5 +1,4 @@
-﻿using Dicer.Tests.Factories;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace Dicer.Tests.Nodes;
@@ -14,12 +13,10 @@ public class NumberNodeTests
 		public void ShouldReturnPassedInNumber(double number)
 		{
 			// Arrange
-			var roller = RollerFactory.CreateEmptyRoller();
-			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = new NumberNode(number);
 
 			// Act
-			var evaluation = sut.Evaluate(roller, roundingStrategy);
+			var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
 
 			// Assert
 			evaluation.Result.Should().Be(number);

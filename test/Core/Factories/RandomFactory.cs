@@ -6,7 +6,7 @@ namespace Dicer.Tests.Factories;
 
 public static class RandomFactory
 {
-	public static IRandom CreateRandom(params int[] randomValues)
+	internal static IRandom CreateRandom(params int[] randomValues)
 	{
 		if (!randomValues.Any())
 		{

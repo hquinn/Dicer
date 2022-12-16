@@ -11,22 +11,19 @@ BasicRepeatingNodeExample();
 
 static void BasicParsingExample()
 {
-	var node = Parse("4D6K3 + 2d10m2");
-	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
+	var response = Parse("4D6K3 + 2d10m2").Evaluate();
 	Console.WriteLine(Format(response, "BasicParsingExample"));
 }
 
 static void ComplexParsingExample()
 {
-	var node = Parse("4D(5/(1+2))K-3 +- (5*(1+2))d10m(1d2k1)");
-	var response = node.Evaluate(new RandomRoller(), new RoundToCeiling());
+	var response = Parse("4D(5/(1+2))K-3 +- (5*(1+2))d10m(1d2k1)").Evaluate();
 	Console.WriteLine(Format(response, "ComplexParsingExample"));
 }
 
 static void BasicRepeatingNodeExample()
 {
-	var node = Parse("4D6K3", "6");
-	var responses = node.Evaluate(new RandomRoller(), new RoundToCeiling());
+	var responses = Parse("4D6K3", "6").Evaluate();
 	Console.WriteLine(FormatEnumerable(responses, "BasicRepeatingNodeExample"));
 }
 

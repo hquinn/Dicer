@@ -3,7 +3,7 @@
 /// <summary>
 ///     Represents a node in an expression tree, used for calculating mathematical expressions.
 /// </summary>
-internal interface INode
+public interface INode
 {
 	/// <summary>
 	///     Calculates the node.
@@ -11,5 +11,5 @@ internal interface INode
 	/// <param name="roller">The <see cref="IRoller" /> to use when rolling dice.</param>
 	/// <param name="roundingStrategy">The <see cref="IRoundingStrategy" /> to use when rounding values.</param>
 	/// <returns>The <see cref="NodeResponse" /> of the resulting calculations.</returns>
-	NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy);
+	NodeResponse Evaluate(Roller roller = Roller.Random, RoundingStrategy roundingStrategy = RoundingStrategy.RoundToFloor);
 }

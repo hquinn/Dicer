@@ -6,84 +6,62 @@ public static class NodeFactory
 {
 	internal static AddNode CreateAddNode(double first, double second)
 	{
-		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
-		var mockFirst = Substitute.For<INode>();
-		mockFirst.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(first, firstRolls));
-
-		var secondRolls = new[] { new RollResponse((int)second, new[] { new Roll((int)second, (int)second) }) };
-		var mockSecond = Substitute.For<INode>();
-		mockSecond.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(second, secondRolls));
-
-		return new(mockFirst, mockSecond);
+		return new(Create(first), Create(second));
 	}
 
    internal static SubtractNode CreateSubtractNode(double first, double second)
 	{
-		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
-		var mockFirst = Substitute.For<INode>();
-		mockFirst.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(first, firstRolls));
-
-		var secondRolls = new[] { new RollResponse((int)second, new[] { new Roll((int)second, (int)second) }) };
-		var mockSecond = Substitute.For<INode>();
-		mockSecond.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(second, secondRolls));
-
-		return new(mockFirst, mockSecond);
+		return new(Create(first), Create(second));
 	}
 
    internal static MultiplyNode CreateMultiplyNode(double first, double second)
 	{
-		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
-		var mockFirst = Substitute.For<INode>();
-		mockFirst.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(first, firstRolls));
-
-		var secondRolls = new[] { new RollResponse((int)second, new[] { new Roll((int)second, (int)second) }) };
-		var mockSecond = Substitute.For<INode>();
-		mockSecond.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(second, secondRolls));
-
-		return new(mockFirst, mockSecond);
+		return new(Create(first), Create(second));
 	}
 
    internal static DivideNode CreateDivideNode(double first, double second)
 	{
-		var firstRolls = new[] { new RollResponse((int)first, new[] { new Roll((int)first, (int)first) }) };
-		var mockFirst = Substitute.For<INode>();
-		mockFirst.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(first, firstRolls));
-
-		var secondRolls = new[] { new RollResponse((int)second, new[] { new Roll((int)second, (int)second) }) };
-		var mockSecond = Substitute.For<INode>();
-		mockSecond.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(second, secondRolls));
-
-		return new(mockFirst, mockSecond);
+		return new(Create(first), Create(second));
 	}
 
    internal static DiceNode CreateDiceNode(int numDice, int dieSize)
 	{
-		var mockNumDice = Substitute.For<INode>();
-		mockNumDice.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(numDice));
-
-		var mockDieSize = Substitute.For<INode>();
-		mockDieSize.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(dieSize));
-
-		return new(mockNumDice, mockDieSize);
+		return new(CreateWithoutRolls(numDice), CreateWithoutRolls(dieSize));
 	}
 
    internal static DiceNode CreateDiceNodeWithRolls(int numDice, int dieSize)
 	{
-		var mockNumDice = Substitute.For<INode>();
-		mockNumDice.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(numDice, new[] { new RollResponse(3, new[] { new Roll(3, 6) }) }));
-
-		var mockDieSize = Substitute.For<INode>();
-		mockDieSize.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(dieSize, new[] { new RollResponse(6, new[] { new Roll(6, 6) }) }));
+		var mockNumDice = CreateWithRolls(numDice, new[] { new RollResponse(3, new[] { new Roll(3, 6) }) });
+		var mockDieSize = CreateWithRolls(dieSize, new[] { new RollResponse(6, new[] { new Roll(6, 6) }) });
 
 		return new(mockNumDice, mockDieSize);
 	}
 
    internal static UnaryNode CreateUnaryNode(double node)
 	{
-		var nodeRolls = new[] { new RollResponse((int)node, new[] { new Roll((int)node, (int)node) }) };
-		var mockNode = Substitute.For<INode>();
-		mockNode.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(node, nodeRolls));
-
-		return new(mockNode);
+		return new(Create(node));
 	}
+
+   private static BaseNode Create(double number)
+   {
+	   var rolls = new[] { new RollResponse((int)number, new[] { new Roll((int)number, (int)number) }) };
+	   var mockNumber = Substitute.For<BaseNode>();
+	   mockNumber.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(number, rolls));
+
+	   return mockNumber;
+	}
+
+   private static BaseNode CreateWithoutRolls(int numDice)
+   {
+	   var mockDice = Substitute.For<BaseNode>();
+	   mockDice.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(numDice));
+	   return mockDice;
+	}
+
+   private static BaseNode CreateWithRolls(int numDice, RollResponse[] rollResponses)
+   {
+	   var mockNumDice = Substitute.For<BaseNode>();
+	   mockNumDice.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(numDice, rollResponses));
+	   return mockNumDice;
+   }
 }

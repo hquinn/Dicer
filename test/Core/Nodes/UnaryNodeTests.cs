@@ -11,12 +11,10 @@ public class UnaryNodeTests
 	public void ShouldReturnNegationOfPassedInNode(double node, double expected)
 	{
 		// Arrange
-		var roller = RollerFactory.CreateEmptyRoller();
-		var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 		var sut = NodeFactory.CreateUnaryNode(node);
 
 		// Act
-		var evaluation = sut.Evaluate(roller, roundingStrategy);
+		var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
 
 		// Assert
 		evaluation.Result.Should().Be(expected);
@@ -26,8 +24,6 @@ public class UnaryNodeTests
 	public void ShouldReturnRollsAlongWithOtherNodes()
 	{
 		// Arrange
-		var roller = RollerFactory.CreateEmptyRoller();
-		var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 		var sut = NodeFactory.CreateUnaryNode(1);
 
 		var expected = new[]
@@ -36,7 +32,7 @@ public class UnaryNodeTests
 		};
 
 		// Act
-		var evaluation = sut.Evaluate(roller, roundingStrategy);
+		var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
 
 		// Assert
 		evaluation.RollResponses.Should().BeEquivalentTo(expected);
@@ -46,13 +42,11 @@ public class UnaryNodeTests
 	public void ShouldRoundNodesBasedOnRoundingStrategy()
 	{
 		// Arrange
-		var roller = RollerFactory.CreateEmptyRoller();
-		var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 		var sut = NodeFactory.CreateUnaryNode(3.7);
 		var expected = -4;
 
 		// Act
-		var evaluation = sut.Evaluate(roller, roundingStrategy);
+		var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToCeiling);
 
 		// Assert
 		evaluation.Result.Should().Be(expected);

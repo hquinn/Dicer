@@ -2,30 +2,20 @@
 
 namespace Dicer;
 
-internal class RepeatingNode : IRepeatingNode
+internal readonly record struct RepeatingNode(INode Node, INode Repeat) : IRepeatingNode
 {
-	private readonly INode _node;
-	private readonly INode _repeat;
-
-	public RepeatingNode(INode node, INode repeat)
+	public IEnumerable<NodeResponse> Evaluate(Roller roller, RoundingStrategy roundingStrategy)
 	{
-		_node = node;
-		_repeat = repeat;
-	}
-
-	/// <inheritdoc />
-	public IEnumerable<NodeResponse> Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-	{
-		var repeatCount = (int)_repeat.Evaluate(roller, roundingStrategy).Result;
+		var repeatCount = (int)Repeat.Evaluate(roller, roundingStrategy).Result;
 
 		for (var i = 0; i < repeatCount; i++)
 		{
-			yield return _node.Evaluate(roller, roundingStrategy);
+			yield return Node.Evaluate(roller, roundingStrategy);
 		}
 	}
 
 	public override string ToString()
 	{
-		return $"REPEAT({_node},{_repeat})";
+		return $"REPEAT({Node},{Repeat})";
 	}
 }

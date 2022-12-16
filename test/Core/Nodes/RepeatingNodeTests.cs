@@ -13,14 +13,12 @@ public class RepeatingNodeTests
 	public void ShouldReturnNodeEvaluationNumberOfTimesEqualToRepeat(double first, double second, double expected)
 	{
 		// Arrange
-		var roller = RollerFactory.CreateEmptyRoller();
-		var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 		var node = NodeFactory.CreateAddNode(first, second);
 		var repeat = new NumberNode(3);
 		var sut = new RepeatingNode(node, repeat);
 
 		// Act
-		var evaluation = sut.Evaluate(roller, roundingStrategy);
+		var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
 
 		// Assert
 		evaluation.Should().HaveCount(3);

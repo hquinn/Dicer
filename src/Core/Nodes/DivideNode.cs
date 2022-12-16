@@ -3,26 +3,18 @@
 /// <summary>
 ///     Node for dividing two <see cref="INode" /> together.
 /// </summary>
-internal class DivideNode : INode
+internal record DivideNode(BaseNode First, BaseNode Second) : BaseNode
 {
-	private readonly INode _first;
-	private readonly INode _second;
-
-	public DivideNode(INode first, INode second)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
-		_first = first;
-		_second = second;
-	}
+		var firstEval = First.Evaluate(roller, roundingStrategy);
+		var secondEval = Second.Evaluate(roller, roundingStrategy);
 
-	/// <inheritdoc />
-	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-	{
-		return NodeResponse.Divide(_first.Evaluate(roller, roundingStrategy),
-			_second.Evaluate(roller, roundingStrategy), roundingStrategy);
+		return NodeResponse.Divide(firstEval, secondEval, roundingStrategy);
 	}
 
 	public override string ToString()
 	{
-		return $"DIVIDE({_first},{_second})";
+		return $"DIVIDE({First},{Second})";
 	}
 }

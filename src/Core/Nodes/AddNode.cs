@@ -3,26 +3,15 @@
 /// <summary>
 ///     Node for adding two <see cref="INode" /> together.
 /// </summary>
-internal class AddNode : INode
+internal record AddNode(BaseNode First, BaseNode Second) : BaseNode
 {
-	private readonly INode _first;
-	private readonly INode _second;
-
-	public AddNode(INode first, INode second)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
 	{
-		_first = first;
-		_second = second;
-	}
-
-	/// <inheritdoc />
-	public NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
-	{
-		return NodeResponse.Plus(_first.Evaluate(roller, roundingStrategy), _second.Evaluate(roller, roundingStrategy),
-			roundingStrategy);
-	}
+		return NodeResponse.Plus(First.Evaluate(roller, roundingStrategy), Second.Evaluate(roller, roundingStrategy), roundingStrategy);
+	}	
 
 	public override string ToString()
 	{
-		return $"ADD({_first},{_second})";
+		return $"ADD({First},{Second})";
 	}
 }

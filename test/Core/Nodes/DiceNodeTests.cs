@@ -15,12 +15,10 @@ public class DiceNodeTests
 		public void ShouldReturnRollResultOfPassedInNodes(int numDice, int dieSize, int expected)
 		{
 			// Arrange
-			var roller = RollerFactory.CreateRoller(numDice, dieSize);
-			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = NodeFactory.CreateDiceNode(numDice, dieSize);
 
 			// Act
-			var evaluation = sut.Evaluate(roller, roundingStrategy);
+			var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
 
 			// Assert
 			evaluation.Result.Should().Be(expected);
@@ -32,8 +30,6 @@ public class DiceNodeTests
 			// Arrange
 			const int numDice = 3;
 			const int dieSize = 6;
-			var roller = RollerFactory.CreateRoller(numDice, dieSize);
-			var roundingStrategy = RoundingStrategyFactory.CreateRoundingStrategy();
 			var sut = NodeFactory.CreateDiceNodeWithRolls(numDice, dieSize);
 
 			var expected = new[]
@@ -44,7 +40,7 @@ public class DiceNodeTests
 			};
 
 			// Act
-			var evaluation = sut.Evaluate(roller, roundingStrategy);
+			var evaluation = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
 
 			// Assert
 			evaluation.RollResponses.Should().BeEquivalentTo(expected);
