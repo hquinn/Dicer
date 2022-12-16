@@ -4,20 +4,21 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <WarnAsErrors>nullable</WarnAsErrors>
-    <AssemblyName>Dicer.Core</AssemblyName>
+    <AssemblyName>Dicer</AssemblyName>
     <RootNamespace>Dicer</RootNamespace>
     <Authors>hquinn</Authors>
-    <Description>Core logic creating dice expressions</Description>
+    <Description>An open source dice expression library</Description>
     <PackageProjectUrl>https://github.com/hquinn/Dicer/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hquinn/Dicer/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<VersionPrefix>2.0.0.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="Dicer.Tests" />
-    <InternalsVisibleTo Include="Dicer.Parsing" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 

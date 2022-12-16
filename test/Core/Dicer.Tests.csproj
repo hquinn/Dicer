@@ -6,8 +6,8 @@
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
     <WarnAsErrors>nullable</WarnAsErrors>
-    <AssemblyName>Dicer.Parsing.Tests</AssemblyName>
-    <RootNamespace>Dicer.Parsing.Tests</RootNamespace>
+    <AssemblyName>Dicer.Tests</AssemblyName>
+    <RootNamespace>Dicer.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,8 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Parsing\Parsing.csproj" />
-    <ProjectReference Include="..\..\src\Core\Core.csproj" />
+    <ProjectReference Include="..\..\src\Core\Dicer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Rounding\" />
   </ItemGroup>
 
 </Project>

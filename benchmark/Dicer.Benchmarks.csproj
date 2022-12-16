@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core\Core.csproj" />
-    <ProjectReference Include="..\..\src\Parsing\Parsing.csproj" />
+    <ProjectReference Include="..\src\Core\Dicer.csproj" />
   </ItemGroup>
 
 </Project>
