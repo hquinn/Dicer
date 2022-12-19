@@ -34,9 +34,9 @@ public class DiceNodeTests
 
 			var expected = new[]
 			{
-				new RollResponse(3, new[] { new Roll(3, 6) }),
-				new RollResponse(numDice * dieSize, Enumerable.Repeat<Roll>(new(dieSize, dieSize), numDice)),
-				new RollResponse(6, new[] { new Roll(6, 6) })
+				new RollResponse(3, new[] { new Roll(3, 6) }, Enumerable.Empty<Roll>()),
+				new RollResponse(numDice * dieSize, Enumerable.Repeat<Roll>(new(dieSize, dieSize), numDice), Enumerable.Empty<Roll>()),
+				new RollResponse(6, new[] { new Roll(6, 6) }, Enumerable.Empty<Roll>())
 			};
 
 			// Act

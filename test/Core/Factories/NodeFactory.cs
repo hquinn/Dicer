@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 
 namespace Dicer.Tests.Factories;
 
@@ -31,8 +32,8 @@ public static class NodeFactory
 
    internal static DiceNode CreateDiceNodeWithRolls(int numDice, int dieSize)
 	{
-		var mockNumDice = CreateWithRolls(numDice, new[] { new RollResponse(3, new[] { new Roll(3, 6) }) });
-		var mockDieSize = CreateWithRolls(dieSize, new[] { new RollResponse(6, new[] { new Roll(6, 6) }) });
+		var mockNumDice = CreateWithRolls(numDice, new[] { new RollResponse(3, new[] { new Roll(3, 6) }, Array.Empty<Roll>()) });
+		var mockDieSize = CreateWithRolls(dieSize, new[] { new RollResponse(6, new[] { new Roll(6, 6) }, Array.Empty<Roll>()) });
 
 		return new(mockNumDice, mockDieSize);
 	}
@@ -44,7 +45,7 @@ public static class NodeFactory
 
    private static BaseNode Create(double number)
    {
-	   var rolls = new[] { new RollResponse((int)number, new[] { new Roll((int)number, (int)number) }) };
+	   var rolls = new[] { new RollResponse((int)number, new[] { new Roll((int)number, (int)number) }, Array.Empty<Roll>()) };
 	   var mockNumber = Substitute.For<BaseNode>();
 	   mockNumber.Evaluate(Arg.Any<IRoller>(), Arg.Any<IRoundingStrategy>()).Returns(new NodeResponse(number, rolls));
 

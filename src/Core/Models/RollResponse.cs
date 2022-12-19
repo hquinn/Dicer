@@ -8,10 +8,10 @@ namespace Dicer;
 /// </summary>
 /// <param name="Result">The result of the roll.</param>
 /// <param name="Rolls">All the rolls for the response.</param>
-public record RollResponse(int Result, IEnumerable<Roll> Rolls)
+public record RollResponse(int Result, IEnumerable<Roll> Rolls, IEnumerable<Roll> Discarded)
 {
-	internal static RollResponse CreateResponse(IEnumerable<Roll> rolls)
+	internal static RollResponse CreateResponse(IEnumerable<Roll> rolls, IEnumerable<Roll> discarded)
 	{
-		return new(rolls.Sum(x => x.Result), rolls);
+		return new(rolls.Sum(x => x.Result), rolls, discarded);
 	}
 }

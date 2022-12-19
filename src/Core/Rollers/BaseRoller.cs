@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dicer;
 
@@ -20,9 +22,14 @@ internal abstract class BaseRoller : IRoller
 		var minimumResult = new NodeRollResponse(minimum, roundingStrategy);
 
 		var rolls = RollDice(numDiceResult, dieSizeResult, minimumResult, roundingStrategy)
+			.ToArray();
+
+		var rollsToKeep = rolls
 			.PickDiceToKeep(keep, roundingStrategy);
 
-		return RollResponse.CreateResponse(rolls);
+		var discarded = rolls.PickDiceToDiscard(keep, roundingStrategy);
+
+		return RollResponse.CreateResponse(rollsToKeep, discarded);
 	}
 
 	protected abstract int RollSingleDice(int dieSize, int minimumValue, IRoundingStrategy roundingStrategy);

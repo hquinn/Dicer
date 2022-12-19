@@ -1,4 +1,5 @@
 ﻿using Dicer.Tests.Factories;
+using Dicer.Tests.Helpers;
 using FluentAssertions;
 using System.Linq;
 using Xunit;
@@ -9,82 +10,46 @@ public class MinRollerTests
 {
 	public class RollTests
 	{
+		private const int Min = 1;
+		private const int DieSize = 6;
+		private const int DefaultKeep = 3;
+
+		private MinRoller Sut => new();
+
 		[Fact]
 		public void ShouldReturnListOfMinimumRolls()
 		{
-			// Arrange
-			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
-			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
-			NodeResponse? keep = null;
-			NodeResponse? minimum = null;
-			var sut = new MinRoller();
-			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
-
-			// Act
-			var result = sut.Roll(numDice, dieSize, keep, minimum, RoundingStrategy.RoundToFloor.Create());
-
-			// Assert
-			result.Should().BeEquivalentTo(expected);
+			RollerTests.ShouldReturnListOfRolls(Sut, Min);
 		}
 
 		[Fact]
 		public void ShouldReturnLessRollsBasedOnKeep()
 		{
-			// Arrange
-			var numDice = NodeResponseFactory.CreateSimpleResponse(4);
-			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
-			var keep = NodeResponseFactory.CreateSimpleResponse(3);
-			NodeResponse? minimum = null;
-			var sut = new MinRoller();
-			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
-
-			// Act
-			var result = sut.Roll(numDice, dieSize, keep, minimum, RoundingStrategy.RoundToFloor.Create());
-
-			// Assert
-			result.Should().BeEquivalentTo(expected);
+			RollerTests.ShouldReturnLessRollsBasedOnKeep(Sut, Min);
 		}
 
 		[Fact]
 		public void ShouldReturnSameAsNumDiceIfKeepIsMore()
 		{
-			// Arrange
-			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
-			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
-			var keep = NodeResponseFactory.CreateSimpleResponse(4);
-			NodeResponse? minimum = null;
-			var sut = new MinRoller();
-			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
-
-			// Act
-			var result = sut.Roll(numDice, dieSize, keep, minimum, RoundingStrategy.RoundToFloor.Create());
-
-			// Assert
-			result.Should().BeEquivalentTo(expected);
+			RollerTests.ShouldReturnSameAsNumDiceIfKeepIsMore(Sut, Min);
 		}
 
 		[Fact]
 		public void ShouldReturnAbsoluteValueOfKeep()
 		{
-			// Arrange
-			var numDice = NodeResponseFactory.CreateSimpleResponse(4);
-			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
-			var keep = NodeResponseFactory.CreateSimpleResponse(-3);
-			NodeResponse? minimum = null;
-			var sut = new MinRoller();
-			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
+			RollerTests.ShouldReturnAbsoluteValueOfKeep(Sut, Min);
+		}
 
-			// Act
-			var result = sut.Roll(numDice, dieSize, keep, minimum, RoundingStrategy.RoundToFloor.Create());
-
-			// Assert
-			result.Should().BeEquivalentTo(expected);
+		[Fact]
+		public void ShouldReturnSameAsNumDiceIfKeepIsMoreAndKeepIsNegative()
+		{
+			RollerTests.ShouldReturnSameAsNumDiceIfKeepIsMoreAndKeepIsNegative(Sut, Min);
 		}
 
 		[Theory]
-		[InlineData(-4, -6, 3, 1, -6, 3, 3)]
-		[InlineData(4, -6, 3, -1, -6, 3, -3)]
-		[InlineData(-4, 6, 3, -1, 6, 3, -3)]
+		[InlineData(-4, -DieSize, DefaultKeep, 4, -DieSize, DefaultKeep, Min)]
+		[InlineData(4, -DieSize, DefaultKeep, -4, -DieSize, DefaultKeep, -Min)]
+		[InlineData(-4, DieSize, DefaultKeep, -4, DieSize, DefaultKeep, -Min)]
 		public void ShouldHandleResultIfNegative(
 			int numDiceParam,
 			int dieSizeParam,
@@ -92,59 +57,29 @@ public class MinRollerTests
 			int numDiceResult,
 			int dieSizeResult,
 			int keepResult,
-			int result)
+			int rollResult)
 		{
-			// Arrange
-			var numDice = NodeResponseFactory.CreateSimpleResponse(numDiceParam);
-			var dieSize = NodeResponseFactory.CreateSimpleResponse(dieSizeParam);
-			var keep = NodeResponseFactory.CreateSimpleResponse(keepParam);
-			NodeResponse? minimum = null;
-			var sut = new MinRoller();
-
-			var expected = new RollResponse(result,
-				Enumerable.Repeat(new Roll(numDiceResult, dieSizeResult), keepResult));
-
-			// Act
-			var actual = sut.Roll(numDice, dieSize, keep, minimum, RoundingStrategy.RoundToFloor.Create());
-
-			// Assert
-			actual.Should().BeEquivalentTo(expected);
+			RollerTests.ShouldHandleResultIfNegative(
+				Sut,
+				numDiceParam,
+				dieSizeParam,
+				keepParam,
+				numDiceResult,
+				dieSizeResult,
+				keepResult,
+				rollResult);
 		}
 
 		[Fact]
-		public void ShouldReturnListParameterMinRollsWhenNotNull()
+		public void ShouldReturnListOfParameterMinRolls()
 		{
-			// Arrange
-			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
-			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
-			NodeResponse? keep = null;
-			var minimum = NodeResponseFactory.CreateSimpleResponse(3);
-			var sut = new MinRoller();
-			var expected = new RollResponse(9, Enumerable.Repeat(new Roll(3, 6), 3));
-
-			// Act
-			var result = sut.Roll(numDice, dieSize, keep, minimum, RoundingStrategy.RoundToFloor.Create());
-
-			// Assert
-			result.Should().BeEquivalentTo(expected);
+			RollerTests.ShouldReturnListOfParameterMinRolls(Sut, Min + 1);
 		}
 
 		[Fact]
 		public void ShouldNotReturnListOfParameterMinRollsWhenMinIsGreaterThanDieSize()
 		{
-			// Arrange
-			var numDice = NodeResponseFactory.CreateSimpleResponse(3);
-			var dieSize = NodeResponseFactory.CreateSimpleResponse(6);
-			NodeResponse? keep = null;
-			var minimum = NodeResponseFactory.CreateSimpleResponse(7);
-			var sut = new MinRoller();
-			var expected = new RollResponse(3, Enumerable.Repeat(new Roll(1, 6), 3));
-
-			// Act
-			var result = sut.Roll(numDice, dieSize, keep, minimum, RoundingStrategy.RoundToFloor.Create());
-
-			// Assert
-			result.Should().BeEquivalentTo(expected);
+			RollerTests.ShouldNotReturnListOfParameterMinRollsWhenMinIsGreaterThanDieSize(Sut, Min);
 		}
 	}
 }

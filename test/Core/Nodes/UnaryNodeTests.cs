@@ -1,5 +1,6 @@
 ﻿using Dicer.Tests.Factories;
 using FluentAssertions;
+using System.Linq;
 using Xunit;
 
 namespace Dicer.Tests.Nodes;
@@ -28,7 +29,7 @@ public class UnaryNodeTests
 
 		var expected = new[]
 		{
-			new RollResponse(1, new[] { new Roll(1, 1) })
+			new RollResponse(1, new[] { new Roll(1, 1) }, Enumerable.Empty<Roll>())
 		};
 
 		// Act

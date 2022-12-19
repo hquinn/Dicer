@@ -57,14 +57,23 @@ static string GetHeader(string[] args)
 
 static void OutputRolls(NodeResponse response, StringBuilder builder)
 {
-	foreach (var (_, rolls) in response.RollResponses!)
+	foreach (var (_, rolls, discarded) in response.RollResponses!)
 	{
 		var rollArray = rolls as Roll[] ?? rolls.ToArray();
+		var discardedArray = discarded as Roll[] ?? discarded.ToArray();
 
 		if (rollArray.Any())
 		{
-			builder.AppendLine(
+			builder.Append(
 				$"Die Size({rollArray.First().DieSize}): [{string.Join(", ", rollArray.Select(x => x.Result))}]");
+
+			if (discardedArray.Any())
+			{
+				builder.AppendLine(
+					$"/[{string.Join(", ", discardedArray.Select(x => x.Result))}]");
+			}
+
+			builder.AppendLine();
 		}
 	}
 }
