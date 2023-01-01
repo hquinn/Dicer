@@ -42,12 +42,12 @@ The `Evaluate` method is defaulted to work out of the box for random dice rollin
 
 Dicer does support non-random rolling via `Min` (will roll 1 for all dice), `Average` (will roll the fixed value average for all dice), and `Max` (will roll the die size for all dice).
 
-Dicer also supports rounding strategies, such as `RoundToCeiling`, `RoundToFloor`, `RoundToNearest`, and `NoRounding`. Note that dice expressions will always be rounded before other math expressions regardless if `NoRounding` is selected (e.g. `1d8 + (5 / 2)` will round the result of `1d8` first).
+Dicer also supports rounding strategies (`RoundingStrategy`), such as `RoundToCeiling`, `RoundToFloor` (default), `RoundToNearest`, and `NoRounding`, which will round the final value returned. Since dice expressions can only be represented with discrete numbers (doesn't make sense for dice to be represented with continuous numbers), there's an additional overload to specifically round dice values (`DiceRoundingStrategy`) with the possible values being `RoundToCeiling` (default), `RoundToFloor`, and `RoundToNearest`.
 
 To use, simply pass the overloaded parameters into the `Evaluate` function:
 
 ```csharp
-NodeResponse response = Parse("1d8 + (5 / 2)").Evaluate(Roller.Max, RoundingStrategy.NoRounding);
+NodeResponse response = Parse("1d8 + (5 / 2)").Evaluate(Roller.Max, RoundingStrategy.NoRounding, DiceRoundingStrategy.RoundToNearest);
 ```
 
 #### Repeating Dice
