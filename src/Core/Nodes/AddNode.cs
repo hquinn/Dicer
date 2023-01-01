@@ -5,9 +5,12 @@
 /// </summary>
 internal record AddNode(BaseNode First, BaseNode Second) : BaseNode
 {
-	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy diceRoundingStrategy)
 	{
-		return NodeResponse.Plus(First.Evaluate(roller, roundingStrategy), Second.Evaluate(roller, roundingStrategy), roundingStrategy);
+		var firstEval = First.Evaluate(roller, diceRoundingStrategy);
+		var secondEval = Second.Evaluate(roller, diceRoundingStrategy);
+		
+		return NodeResponse.Plus(firstEval, secondEval);
 	}	
 
 	public override string ToString()

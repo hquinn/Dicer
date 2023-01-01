@@ -29,8 +29,4 @@
     <ProjectReference Include="..\..\src\Core\Dicer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Rounding\" />
-  </ItemGroup>
-
 </Project>

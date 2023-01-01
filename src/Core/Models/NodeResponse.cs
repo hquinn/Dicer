@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Dicer;
 
@@ -8,44 +9,53 @@ namespace Dicer;
 /// </summary>
 /// <param name="Result">Final result of the calculation from the <see cref="INode" />.</param>
 /// <param name="RollResponses">All rolls and results which occurred from the <see cref="INode" />.</param>
-public record NodeResponse(double Result, IEnumerable<RollResponse>? RollResponses = null)
+public record NodeResponse
 {
-	internal static NodeResponse Plus(NodeResponse first, NodeResponse second, IRoundingStrategy roundingStrategy)
+	public double Result { get; }
+	public IEnumerable<RollResponse> RollResponses { get; }
+	
+	public NodeResponse(double result, IEnumerable<RollResponse>? rollResponses = null)
 	{
-		var calculation = roundingStrategy.Round(first.Result + second.Result);
+		Result = result;
+		RollResponses = rollResponses ?? Enumerable.Empty<RollResponse>();
+	}
+	
+	internal static NodeResponse Plus(NodeResponse first, NodeResponse second)
+	{
+		var calculation = first.Result + second.Result;
 
 		return CreateNodeResponse(calculation, first.RollResponses, second.RollResponses);
 	}
 
-	internal static NodeResponse Minus(NodeResponse first, NodeResponse second, IRoundingStrategy roundingStrategy)
+	internal static NodeResponse Minus(NodeResponse first, NodeResponse second)
 	{
-		var calculation = roundingStrategy.Round(first.Result - second.Result);
+		var calculation = first.Result - second.Result;
 
 		return CreateNodeResponse(calculation, first.RollResponses, second.RollResponses);
 	}
 
-	internal static NodeResponse Times(NodeResponse first, NodeResponse second, IRoundingStrategy roundingStrategy)
+	internal static NodeResponse Times(NodeResponse first, NodeResponse second)
 	{
-		var calculation = roundingStrategy.Round(first.Result * second.Result);
+		var calculation = first.Result * second.Result;
 
 		return CreateNodeResponse(calculation, first.RollResponses, second.RollResponses);
 	}
 
-	internal static NodeResponse Divide(NodeResponse first, NodeResponse second, IRoundingStrategy roundingStrategy)
+	internal static NodeResponse Divide(NodeResponse first, NodeResponse second)
 	{
-		var calculation = roundingStrategy.Round(first.Result / second.Result);
+		var calculation = first.Result / second.Result;
 
 		return CreateNodeResponse(calculation, first.RollResponses, second.RollResponses);
 	}
 
-	internal static NodeResponse Unary(NodeResponse node, IRoundingStrategy roundingStrategy)
+	internal static NodeResponse Unary(NodeResponse node)
 	{
-		var calculation = -roundingStrategy.Round(node.Result);
+		var calculation = -node.Result;
 
 		return CreateNodeResponse(calculation, node.RollResponses);
 	}
 
-	private static NodeResponse CreateNodeResponse(double result, params IEnumerable<RollResponse>?[] rolls)
+	private static NodeResponse CreateNodeResponse(double result, params IEnumerable<RollResponse>[] rolls)
 	{
 		return new(result, RollHelpers.Merge(rolls));
 	}

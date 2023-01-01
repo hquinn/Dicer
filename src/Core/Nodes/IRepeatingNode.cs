@@ -11,8 +11,12 @@ public interface IRepeatingNode
 	/// <summary>
 	///     Calculates the node multiple times.
 	/// </summary>
-	/// <param name="roller">The <see cref="IRoller" /> to use when rolling dice.</param>
-	/// <param name="roundingStrategy">The <see cref="IRoundingStrategy" /> to use when rounding values.</param>
+	/// <param name="roller">The roller to use when rolling dice.</param>
+	/// <param name="roundingStrategy">The rounding strategy to use when rounding the result.</param>
+	/// <param name="diceRoundingStrategy">The rounding strategy to use when rounding dice values.</param>
 	/// <returns>The <see cref="NodeResponse" /> of the resulting calculations.</returns>
-	IEnumerable<NodeResponse> Evaluate(Roller roller = Roller.Random, RoundingStrategy roundingStrategy = RoundingStrategy.RoundToFloor);
+	IEnumerable<NodeResponse> Evaluate(
+		Roller roller = Roller.Random, 
+		RoundingStrategy roundingStrategy = RoundingStrategy.RoundToFloor, 
+		DiceRoundingStrategy diceRoundingStrategy = DiceRoundingStrategy.RoundToCeiling);
 }

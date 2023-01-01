@@ -7,11 +7,6 @@ internal class RandomRoller : BaseRoller
 {
 	private readonly IRandom _random;
 
-	public RandomRoller()
-	{
-		_random = new DefaultRandom();
-	}
-
 	public RandomRoller(IRandom random)
 	{
 		_random = random;

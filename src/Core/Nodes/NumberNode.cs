@@ -5,9 +5,9 @@
 /// </summary>
 internal record NumberNode(double Number) : BaseNode
 {
-	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy diceRoundingStrategy)
 	{
-		return new(roundingStrategy.Round(Number));
+		return new(Number);
 	}
 
 	public override string ToString()

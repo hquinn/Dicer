@@ -5,9 +5,9 @@
 /// </summary>
 internal record UnaryNode(BaseNode Node) : BaseNode
 {
-	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy roundingStrategy)
+	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy diceRoundingStrategy)
 	{
-		return NodeResponse.Unary(Node.Evaluate(roller, roundingStrategy), roundingStrategy);
+		return NodeResponse.Unary(Node.Evaluate(roller, diceRoundingStrategy));
 	}
 
 	public override string ToString()

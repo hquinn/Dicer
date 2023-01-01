@@ -12,7 +12,6 @@ internal static class RoundingStrategyFactory
 			RoundingStrategy.RoundToCeiling => new RoundToCeiling(),
 			RoundingStrategy.RoundToNearest => new RoundToNearest(),
 			RoundingStrategy.NoRounding => new NoRounding(),
-			_ => throw new ArgumentOutOfRangeException(nameof(roundingStrategy), roundingStrategy, null)
 		};
 	}
 }

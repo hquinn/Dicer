@@ -2,15 +2,18 @@
 
 namespace Dicer;
 
-internal readonly record struct RepeatingNode(INode Node, INode Repeat) : IRepeatingNode
+internal record RepeatingNode(INode Node, INode Repeat) : IRepeatingNode
 {
-	public IEnumerable<NodeResponse> Evaluate(Roller roller, RoundingStrategy roundingStrategy)
+	public IEnumerable<NodeResponse> Evaluate(
+		Roller roller, 
+		RoundingStrategy roundingStrategy,
+		DiceRoundingStrategy diceRoundingStrategy)
 	{
-		var repeatCount = (int)Repeat.Evaluate(roller, roundingStrategy).Result;
+		var repeatCount = (int)Repeat.Evaluate(roller, roundingStrategy, diceRoundingStrategy).Result;
 
 		for (var i = 0; i < repeatCount; i++)
 		{
-			yield return Node.Evaluate(roller, roundingStrategy);
+			yield return Node.Evaluate(roller, roundingStrategy, diceRoundingStrategy);
 		}
 	}
 
