@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dicer", "src\Core\Dicer.csproj", "{F8F8A9AD-B1F2-455A-BB49-9B80E6232EE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dicer", "src\Dicer.csproj", "{F8F8A9AD-B1F2-455A-BB49-9B80E6232EE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dicer.Tests", "test\Core\Dicer.Tests.csproj", "{B588B4D4-F44A-4C64-A373-B039E7DEB274}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dicer.Tests", "test\Dicer.Tests.csproj", "{B588B4D4-F44A-4C64-A373-B039E7DEB274}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples", "samples\Samples\Samples.csproj", "{2F750E93-D610-485D-9A48-B09B2E7C6636}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples", "Samples\Samples.csproj", "{2F750E93-D610-485D-9A48-B09B2E7C6636}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dicer.Benchmarks", "benchmark\Dicer.Benchmarks.csproj", "{5A5C2F6C-C465-4BA6-BC93-F80DA9A1222D}"
 EndProject

@@ -4,85 +4,107 @@
     <projectFile>benchmark/Dicer.Benchmarks.csproj</projectFile>
     <projectFile>samples/Samples/Samples.csproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9d3e78a8-0955-4c08-a6e8-f441824c58a5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Core/Rounding/DiceRoundingStrategy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Core/Rounding/DiceRoundingStrategyFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Core/Helpers/EnumerableExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Core/Helpers/RepeatingRandom.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Core/TestData/DiceExpressionData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Core/TestData/TestDataModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Helpers/RollHelpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Helpers/RollHelpers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Models/NodeResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Models/NodeResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/AddNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/AddNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/BaseNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/BaseNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/DiceNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/DiceNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/DivideNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/DivideNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/INode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/INode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/IRepeatingNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/IRepeatingNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/MultiplyNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/MultiplyNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/NumberNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/NumberNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/RepeatingNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/RepeatingNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/SubtractNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/SubtractNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/UnaryNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Nodes/UnaryNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/BaseRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Rollers/BaseRoller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/RandomRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Rollers/RandomRoller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/RollerFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Rollers/RollerFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Dicer.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Core/Dicer.Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Factories/NodeFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Factories/NodeResponseFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Factories/RandomFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Helpers/InfiniteQueue.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Helpers/RollerTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/AddNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/DiceNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/DivideNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/MultiplyNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/NumberNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/RepeatingNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/SubtractNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Nodes/UnaryNodeTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rollers/AverageRollerTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rollers/MaxRollerTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rollers/MinRollerTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rollers/RandomRollerTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rounding/NoRoundingTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rounding/RoundToCeilingTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rounding/RoundToFloorTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Core/Rounding/RoundToNearestTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Dicer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Dicer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dicer.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Dicer.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmark/Dicer.Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark/Dicer.Benchmarks.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/samples/Samples/Samples.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/samples/Samples/Samples.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Dicer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dicer.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Exceptions/ParsingException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/ParsingException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Helpers/RollHelpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Helpers/RollHelpers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Models/NodeResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/NodeResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Models/NodeRollResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/NodeRollResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Models/Roll.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Roll.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Models/RollResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/RollResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/AddNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/AddNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/BaseNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/BaseNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/DiceNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/DiceNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/DivideNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/DivideNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/INode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/INode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/IRepeatingNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/IRepeatingNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/MultiplyNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/MultiplyNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/NumberNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/NumberNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/RepeatingNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/RepeatingNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/SubtractNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/SubtractNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Nodes/UnaryNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Nodes/UnaryNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Parser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Randomizer/DefaultRandom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Randomizer/DefaultRandom.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Randomizer/IRandom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Randomizer/IRandom.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/AverageRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/AverageRoller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/BaseRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/BaseRoller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/IRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/IRoller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/MaxRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/MaxRoller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/MinRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/MinRoller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/RandomRoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/RandomRoller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/Roller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/Roller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rollers/RollerFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rollers/RollerFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/DiceRoundingStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/DiceRoundingStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/DiceRoundingStrategyFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/DiceRoundingStrategyFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/IRoundingStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/IRoundingStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/NoRounding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/NoRounding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/RoundToCeiling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/RoundToCeiling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/RoundToFloor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/RoundToFloor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/RoundToNearest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/RoundToNearest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/RoundingStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/RoundingStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Rounding/RoundingStrategyFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rounding/RoundingStrategyFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Tokenizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tokenizer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Tokens/Token.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tokens/Token.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Core/Dicer.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/test/Dicer.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Core/Factories/RollResponseFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/test/Factories/RollResponseFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Core/Helpers/EnumerableExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/test/Helpers/EnumerableExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Core/Helpers/NodeTestsImplementations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/test/Helpers/NodeTestsImplementations.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Core/Helpers/SequentialRandom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/test/Helpers/SequentialRandom.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Core/NodeTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/test/NodeTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Core/ParserTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/test/ParserTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
   <component name="ProjectId" id="2IzG9CQVx25czju1oRJC3SWJnS6" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/hquinn/Library/Application Support/JetBrains/Rider2022.3/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/hquinn/Library/Application Support/JetBrains/Rider2022.3/resharper-host/SourcesCache&quot;,
-      &quot;/Users/hquinn/.local/share/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/hquinn/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
+      "/Users/hquinn/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache",
+      "/Users/hquinn/.local/share/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Project.Dicer.Benchmarks">
     <configuration name="Dicer.Benchmarks" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -135,6 +157,7 @@
       <workItem from="1671694305278" duration="3781000" />
       <workItem from="1672046853923" duration="8286000" />
       <workItem from="1672405523164" duration="5937000" />
+      <workItem from="1682923322930" duration="634000" />
     </task>
     <servers />
   </component>
@@ -195,19 +218,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/test/Core/NodeTests.cs</url>
-          <line>120</line>
-          <properties documentPath="$PROJECT_DIR$/test/Core/NodeTests.cs" initialLine="118" containingFunctionPresentation="method 'NoDiceTestSuite'">
-            <startOffsets>
-              <option value="3422" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3454" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/Core/Models/NodeRollResponse.cs</url>
           <line>11</line>
