@@ -1,19 +1,54 @@
-﻿namespace Dicer;
+﻿using System;
 
-internal abstract record Token(string Value);
+namespace Dicer;
 
-internal record NumberToken(string Value) : Token(Value)
+internal readonly struct Token
 {
-	private double? _constant;
-	public double Constant => _constant ??= double.Parse(Value);
+	public readonly double? Constant;
+
+	public readonly TokenType TokenType;
+	
+	public Token(double? constant)
+	{
+		TokenType = TokenType.Number;
+		Constant = constant;
+	}
+	
+	public Token(TokenType tokenType)
+	{
+		TokenType = tokenType;
+		Constant = null;
+	}
+
+	public override string ToString()
+	{
+		return TokenType switch
+		{
+			TokenType.Number => Constant?.ToString() ?? "N/A",
+			TokenType.Add => "+",
+			TokenType.Subtract => "-",
+			TokenType.Multiply => "*",
+			TokenType.Divide => "/",
+			TokenType.Dice => "D",
+			TokenType.Keep => "K",
+			TokenType.Minimum => "M",
+			TokenType.Open => "(",
+			TokenType.Close => ")",
+			_ => throw new ArgumentOutOfRangeException()
+		};
+	}
 }
 
-internal record AddToken() : Token("+");
-internal record SubtractToken() : Token("-");
-internal record MultiplyToken() : Token("*");
-internal record DivideToken() : Token("/");
-internal record DiceToken() : Token("D");
-internal record KeepToken() : Token("K");
-internal record MinimumToken() : Token("M");
-internal record OpenToken() : Token("(");
-internal record CloseToken() : Token(")");
+internal enum TokenType
+{
+	Number,
+	Add,
+	Subtract,
+	Multiply,
+	Divide,
+	Dice,
+	Keep,
+	Minimum,
+	Open,
+	Close
+}

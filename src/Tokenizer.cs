@@ -16,68 +16,68 @@ internal static class Tokenizer
 
 			if (char.IsDigit(character))
 			{
-				yield return new NumberToken(ParseNumber(reader));
+				yield return new Token(ParseNumber(reader));
 			}
 
 			else if (character == '+')
 			{
-				yield return new AddToken();
+				yield return new Token(TokenType.Add);
 
 				reader.Read();
 			}
 
 			else if (character == '-')
 			{
-				yield return new SubtractToken();
+				yield return new Token(TokenType.Subtract);
 
 				reader.Read();
 			}
 
 			else if (character == '*')
 			{
-				yield return new MultiplyToken();
+				yield return new Token(TokenType.Multiply);
 
 				reader.Read();
 			}
 
 			else if (character == '/')
 			{
-				yield return new DivideToken();
+				yield return new Token(TokenType.Divide);
 
 				reader.Read();
 			}
 
 			else if (character is 'd' or 'D')
 			{
-				yield return new DiceToken();
+				yield return new Token(TokenType.Dice);
 
 				reader.Read();
 			}
 
 			else if (character is 'k' or 'K')
 			{
-				yield return new KeepToken();
+				yield return new Token(TokenType.Keep);
 
 				reader.Read();
 			}
 
 			else if (character is 'm' or 'M')
 			{
-				yield return new MinimumToken();
+				yield return new Token(TokenType.Minimum);
 
 				reader.Read();
 			}
 
 			else if (character == '(')
 			{
-				yield return new OpenToken();
+				yield return new Token(TokenType.Open);
 
 				reader.Read();
 			}
 
 			else if (character == ')')
 			{
-				yield return new CloseToken();
+				yield return new Token(TokenType.Close);
 
 				reader.Read();
 			}
@@ -94,7 +94,7 @@ internal static class Tokenizer
 		}
 	}
 
-	private static string ParseNumber(TextReader reader)
+	private static double ParseNumber(TextReader reader)
 	{
 		var builder = new StringBuilder();
 		var dotCount = 0;
@@ -116,6 +116,6 @@ internal static class Tokenizer
 			builder.Append(character);
 		} while (char.IsDigit((char)reader.Peek()) || (char)reader.Peek() == '.');
 
-		return builder.ToString();
+		return double.Parse(builder.ToString());
 	}
 }

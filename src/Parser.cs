@@ -19,7 +19,7 @@ public static class Parser
 
 		if (token is not null)
 		{
-			throw new ParsingException($"Token {token.Value.Value} is invalid at this position");
+			throw new ParsingException($"Tok {token.Value} is invalid at this position");
 		}
 
 		return node;
@@ -52,13 +52,9 @@ public static class Parser
 		{
 			Token? currentToken = null;
 
-			if (token.Value is AddToken add)
+			if (token.Value.TokenType is TokenType.Add or TokenType.Subtract)
 			{
-				currentToken = add;
-			}
-			else if (token.Value is SubtractToken subtract)
-			{
-				currentToken = subtract;
+				currentToken = token.Value;
 			}
 
 			if (currentToken is null)
@@ -70,7 +66,7 @@ public static class Parser
 
 			var rhs = ParseMultiplyDivide(ref token);
 
-			if (currentToken is AddToken)
+			if (currentToken.Value.TokenType is TokenType.Add)
 			{
 				lhs = new AddNode(lhs, rhs);
 			}
@@ -91,13 +87,9 @@ public static class Parser
 		{
 			Token? currentToken = null;
 
-			if (token.Value is MultiplyToken multiply)
+			if (token.Value.TokenType is TokenType.Multiply or TokenType.Divide)
 			{
-				currentToken = multiply;
-			}
-			else if (token.Value is DivideToken divide)
-			{
-				currentToken = divide;
+				currentToken = token.Value;
 			}
 
 			if (currentToken is null)
@@ -109,7 +101,7 @@ public static class Parser
 
 			var rhs = ParseDice(ref token);
 
-			if (currentToken is MultiplyToken)
+			if (currentToken.Value.TokenType is TokenType.Multiply)
 			{
 				lhs = new MultiplyNode(lhs, rhs);
 			}
@@ -130,9 +122,9 @@ public static class Parser
 		{
 			Token? currentToken = null;
 
-			if (token.Value is DiceToken dice)
+			if (token.Value.TokenType is TokenType.Dice)
 			{
-				currentToken = dice;
+				currentToken = token.Value;
 			}
 
 			if (currentToken is null)
@@ -144,12 +136,12 @@ public static class Parser
 
 			var rhs = ParseUnary(ref token);
 
-			if (token?.Value is KeepToken)
+			if (token?.Value.TokenType is TokenType.Keep)
 			{
 				Increment(ref token);
 				var khs = ParseUnary(ref token);
 
-				if (token?.Value is MinimumToken)
+				if (token?.Value.TokenType is TokenType.Minimum)
 				{
 					Increment(ref token);
 					var mhs = ParseUnary(ref token);
@@ -161,12 +153,12 @@ public static class Parser
 				}
 			}
 
-			else if (token?.Value is MinimumToken)
+			else if (token?.Value.TokenType is TokenType.Minimum)
 			{
 				Increment(ref token);
 				var mhs = ParseUnary(ref token);
 
-				if (token?.Value is KeepToken)
+				if (token?.Value.TokenType is TokenType.Keep)
 				{
 					Increment(ref token);
 					var khs = ParseUnary(ref token);
@@ -178,7 +170,7 @@ public static class Parser
 				}
 			}
 
-			else if (currentToken is DiceToken)
+			else if (currentToken.Value.TokenType is TokenType.Dice)
 			{
 				lhs = new DiceNode(lhs, rhs);
 			}
@@ -191,18 +183,18 @@ public static class Parser
 	{
 		while (token is not null)
 		{
-			if (token.Value is AddToken)
+			if (token.Value.TokenType is TokenType.Add)
 			{
 				Increment(ref token);
 
 				continue;
 			}
 
-			if (token.Value is SubtractToken)
+			if (token.Value.TokenType is TokenType.Subtract)
 			{
 				Increment(ref token);
 
-				if (token?.Value is SubtractToken or AddToken)
+				if (token?.Value.TokenType is TokenType.Subtract or TokenType.Add)
 				{
 					return new UnaryNode(ParseUnary(ref token));
 				}
@@ -218,19 +210,20 @@ public static class Parser
 
 	private static BaseNode ParseLeaf(ref LinkedListNode<Token>? token)
 	{
-		if (token?.Value is NumberToken number)
+		if (token?.Value.TokenType is TokenType.Number)
 		{
+			var number = token.Value.Constant!.Value;
 			Increment(ref token);
 
-			return new NumberNode(number.Constant);
+			return new NumberNode(number);
 		}
 
-		if (token?.Value is OpenToken)
+		if (token?.Value.TokenType is TokenType.Open)
 		{
 			Increment(ref token);
 			var node = ParseAddSubtract(ref token);
 
-			if (token?.Value is not CloseToken)
+			if (token?.Value.TokenType is not TokenType.Close)
 			{
 				throw new ParsingException("No corresponding closing token");
 			}
@@ -240,7 +233,7 @@ public static class Parser
 			return node;
 		}
 
-		throw new ParsingException($"Token {token?.Value.Value} is invalid at this position");
+		throw new ParsingException($"Tok {token?.Value} is invalid at this position");
 	}
 
 	private static void Increment(ref LinkedListNode<Token>? token)
