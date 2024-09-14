@@ -1,12 +1,12 @@
 ﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Order;
 using static Dicer.Parser;
 
 namespace Parsing.Benchmarks;
 
 [MemoryDiagnoser]
-[Orderer(SummaryOrderPolicy.FastestToSlowest)]
-[RankColumn]
+[SimpleJob(RuntimeMoniker.Net80)]
 public class ParsingBenchmarks
 {
 	private const string ComplexExpression =
