@@ -1,243 +1,202 @@
 ﻿using System.Collections.Generic;
-using static Dicer.Tokenizer;
 
 namespace Dicer;
 
 public static class Parser
 {
-	/// <summary>
-	///     Parses the <paramref name="input" /> into an <see cref="INode" /> expression tree.
-	/// </summary>
-	/// <param name="input">The mathematical expression to parse.</param>
-	/// <returns><see cref="INode" /> expression tree.</returns>
-	/// <exception cref="ParsingException">For invalid characters in <paramref name="input" />.</exception>
-	public static INode Parse(string input)
+    /// <summary>
+    ///     Parses the <paramref name="input" /> into an <see cref="INode" /> expression tree.
+    /// </summary>
+    public static INode Parse(string input)
+    {
+        var tokens = Tokenizer.Tokenize(input);
+        var index = 0;
+        var node = ParseAddSubtract(tokens, ref index);
+
+        if (index < tokens.Count)
+        {
+            throw new ParsingException($"Token {tokens[index]} is invalid at this position");
+        }
+
+        return node;
+    }
+
+    /// <summary>
+    ///     Parses the <paramref name="nodeInput" /> and <paramref name="repeatInput" /> into an <see cref="IRepeatingNode" />
+    ///     expression tree.
+    /// </summary>
+    public static IRepeatingNode Parse(string nodeInput, string repeatInput)
+    {
+        var node = Parse(nodeInput);
+        var repeat = Parse(repeatInput);
+
+        return new RepeatingNode(node, repeat);
+    }
+
+    private static BaseNode ParseAddSubtract(List<Token> tokens, ref int index)
+    {
+        var lhs = ParseMultiplyDivide(tokens, ref index);
+
+        while (index < tokens.Count)
+        {
+            var currentToken = tokens[index];
+
+            if (currentToken.TokenType is TokenType.Add or TokenType.Subtract)
+            {
+                index++;
+                var rhs = ParseMultiplyDivide(tokens, ref index);
+
+                lhs = currentToken.TokenType == TokenType.Add
+                    ? new AddNode(lhs, rhs)
+                    : new SubtractNode(lhs, rhs);
+            }
+            else
+            {
+                return lhs;
+            }
+        }
+
+        return lhs;
+    }
+
+    private static BaseNode ParseMultiplyDivide(List<Token> tokens, ref int index)
+    {
+        var lhs = ParseDice(tokens, ref index);
+
+        while (index < tokens.Count)
+        {
+            var currentToken = tokens[index];
+
+            if (currentToken.TokenType is TokenType.Multiply or TokenType.Divide)
+            {
+                index++;
+                var rhs = ParseDice(tokens, ref index);
+
+                lhs = currentToken.TokenType == TokenType.Multiply
+                    ? new MultiplyNode(lhs, rhs)
+                    : new DivideNode(lhs, rhs);
+            }
+            else
+            {
+                return lhs;
+            }
+        }
+
+        return lhs;
+    }
+
+	private static BaseNode ParseDice(List<Token> tokens, ref int index)
 	{
-		var tokens = new LinkedList<Token>(Tokenize(input));
-		var token = tokens.First;
-		var node = ParseAddSubtract(ref token);
+	    var lhs = ParseUnary(tokens, ref index);  // Parse the left-hand side (before 'd')
 
-		if (token is not null)
-		{
-			throw new ParsingException($"Tok {token.Value} is invalid at this position");
-		}
+	    while (index < tokens.Count)
+	    {
+	        // Check for 'Dice' token
+	        if (tokens[index].TokenType == TokenType.Dice)
+	        {
+	            index++;
+	            var rhs = ParseUnary(tokens, ref index);  // Parse right-hand side (after 'd')
 
-		return node;
+	            // Prepare placeholders for 'Keep' and 'Minimum' nodes
+	            BaseNode? khs = null;
+	            BaseNode? mhs = null;
+
+	            // Check for 'Keep' or 'Minimum' tokens (in any order)
+	            while (index < tokens.Count && tokens[index].TokenType is TokenType.Keep or TokenType.Minimum)
+	            {
+	                if (tokens[index].TokenType is TokenType.Keep)
+	                {
+	                    index++;  // Move past the 'Keep' token
+	                    khs = ParseUnary(tokens, ref index);  // Parse the expression after 'Keep'
+	                }
+	                else if (tokens[index].TokenType is TokenType.Minimum)
+	                {
+	                    index++;  // Move past the 'Minimum' token
+	                    mhs = ParseUnary(tokens, ref index);  // Parse the expression after 'Minimum'
+	                }
+	            }
+
+	            // Now construct the DiceNode based on what we have
+	            if (khs is not null && mhs is not null)
+	            {
+	                lhs = new DiceNode(lhs, rhs, khs, mhs);  // Dice with both Keep and Minimum
+	            }
+	            else if (khs is not null)
+	            {
+	                lhs = new DiceNode(lhs, rhs, khs);  // Dice with only Keep
+	            }
+	            else if (mhs is not null)
+	            {
+	                lhs = new DiceNode(lhs, rhs, null, mhs);  // Dice with only Minimum
+	            }
+	            else
+	            {
+	                lhs = new DiceNode(lhs, rhs);  // Just Dice without Keep or Minimum
+	            }
+	        }
+	        else
+	        {
+	            return lhs;  // Return if no Dice token found
+	        }
+	    }
+
+	    return lhs;
 	}
 
-	/// <summary>
-	///     Parses the <paramref name="nodeInput" /> and <paramref name="repeatInput" /> into an <see cref="IRepeatingNode" />
-	///     expression tree.
-	/// </summary>
-	/// <param name="nodeInput">The mathematical expression to parse.</param>
-	/// <param name="repeatInput">
-	///     The mathematical expression to parse for number of times to repeat
-	///     <paramref name="nodeInput" />.
-	/// </param>
-	/// <returns><see cref="IRepeatingNode" /> expression tree.</returns>
-	/// <exception cref="ParsingException">For invalid characters in <paramref name="nodeInput" />.</exception>
-	public static IRepeatingNode Parse(string nodeInput, string repeatInput)
-	{
-		var node = Parse(nodeInput);
-		var repeat = Parse(repeatInput);
+    private static BaseNode ParseUnary(List<Token> tokens, ref int index)
+    {
+        while (index < tokens.Count)
+        {
+            switch (tokens[index].TokenType)
+            {
+                case TokenType.Add:
+                    index++; // Ignore unary plus
+                    continue;
 
-		return new RepeatingNode(node, repeat);
-	}
+                case TokenType.Subtract:
+                    index++;
+                    return new UnaryNode(ParseUnary(tokens, ref index));
 
-	private static BaseNode ParseAddSubtract(ref LinkedListNode<Token>? token)
-	{
-		var lhs = ParseMultiplyDivide(ref token);
+                default:
+                    return ParseLeaf(tokens, ref index);
+            }
+        }
 
-		while (token is not null)
-		{
-			Token? currentToken = null;
+        return ParseLeaf(tokens, ref index);
+    }
 
-			if (token.Value.TokenType is TokenType.Add or TokenType.Subtract)
-			{
-				currentToken = token.Value;
-			}
+    private static BaseNode ParseLeaf(List<Token> tokens, ref int index)
+    {
+	    if (index >= tokens.Count)
+	    {
+		    throw new ParsingException("Unexpected end of input");
+	    }
 
-			if (currentToken is null)
-			{
-				return lhs;
-			}
+	    // Check for a number
+	    if (tokens[index].TokenType == TokenType.Number)
+	    {
+		    var number = tokens[index].Constant!.Value;
+		    index++;
+		    return new NumberNode(number);
+	    }
 
-			Increment(ref token);
+	    // Check for an open parenthesis
+	    if (tokens[index].TokenType == TokenType.Open)
+	    {
+		    index++;  // Move past the '(' token
+		    var node = ParseAddSubtract(tokens, ref index);  // Parse the expression inside parentheses
 
-			var rhs = ParseMultiplyDivide(ref token);
+		    // Check for a closing parenthesis
+		    if (index >= tokens.Count || tokens[index].TokenType != TokenType.Close)
+		    {
+			    throw new ParsingException("No corresponding closing parenthesis found");
+		    }
 
-			if (currentToken.Value.TokenType is TokenType.Add)
-			{
-				lhs = new AddNode(lhs, rhs);
-			}
-			else
-			{
-				lhs = new SubtractNode(lhs, rhs);
-			}
-		}
+		    index++;  // Move past the ')' token
+		    return node;
+	    }
 
-		return lhs;
-	}
-
-	private static BaseNode ParseMultiplyDivide(ref LinkedListNode<Token>? token)
-	{
-		var lhs = ParseDice(ref token);
-
-		while (token is not null)
-		{
-			Token? currentToken = null;
-
-			if (token.Value.TokenType is TokenType.Multiply or TokenType.Divide)
-			{
-				currentToken = token.Value;
-			}
-
-			if (currentToken is null)
-			{
-				return lhs;
-			}
-
-			Increment(ref token);
-
-			var rhs = ParseDice(ref token);
-
-			if (currentToken.Value.TokenType is TokenType.Multiply)
-			{
-				lhs = new MultiplyNode(lhs, rhs);
-			}
-			else
-			{
-				lhs = new DivideNode(lhs, rhs);
-			}
-		}
-
-		return lhs;
-	}
-
-	private static BaseNode ParseDice(ref LinkedListNode<Token>? token)
-	{
-		var lhs = ParseUnary(ref token);
-
-		while (token is not null)
-		{
-			Token? currentToken = null;
-
-			if (token.Value.TokenType is TokenType.Dice)
-			{
-				currentToken = token.Value;
-			}
-
-			if (currentToken is null)
-			{
-				return lhs;
-			}
-
-			Increment(ref token);
-
-			var rhs = ParseUnary(ref token);
-
-			if (token?.Value.TokenType is TokenType.Keep)
-			{
-				Increment(ref token);
-				var khs = ParseUnary(ref token);
-
-				if (token?.Value.TokenType is TokenType.Minimum)
-				{
-					Increment(ref token);
-					var mhs = ParseUnary(ref token);
-					lhs = new DiceNode(lhs, rhs, khs, mhs);
-				}
-				else
-				{
-					lhs = new DiceNode(lhs, rhs, khs);
-				}
-			}
-
-			else if (token?.Value.TokenType is TokenType.Minimum)
-			{
-				Increment(ref token);
-				var mhs = ParseUnary(ref token);
-
-				if (token?.Value.TokenType is TokenType.Keep)
-				{
-					Increment(ref token);
-					var khs = ParseUnary(ref token);
-					lhs = new DiceNode(lhs, rhs, khs, mhs);
-				}
-				else
-				{
-					lhs = new DiceNode(lhs, rhs, null, mhs);
-				}
-			}
-
-			else if (currentToken.Value.TokenType is TokenType.Dice)
-			{
-				lhs = new DiceNode(lhs, rhs);
-			}
-		}
-
-		return lhs;
-	}
-
-	private static BaseNode ParseUnary(ref LinkedListNode<Token>? token)
-	{
-		while (token is not null)
-		{
-			if (token.Value.TokenType is TokenType.Add)
-			{
-				Increment(ref token);
-
-				continue;
-			}
-
-			if (token.Value.TokenType is TokenType.Subtract)
-			{
-				Increment(ref token);
-
-				if (token?.Value.TokenType is TokenType.Subtract or TokenType.Add)
-				{
-					return new UnaryNode(ParseUnary(ref token));
-				}
-
-				return new UnaryNode(ParseLeaf(ref token));
-			}
-
-			return ParseLeaf(ref token);
-		}
-
-		return ParseLeaf(ref token);
-	}
-
-	private static BaseNode ParseLeaf(ref LinkedListNode<Token>? token)
-	{
-		if (token?.Value.TokenType is TokenType.Number)
-		{
-			var number = token.Value.Constant!.Value;
-			Increment(ref token);
-
-			return new NumberNode(number);
-		}
-
-		if (token?.Value.TokenType is TokenType.Open)
-		{
-			Increment(ref token);
-			var node = ParseAddSubtract(ref token);
-
-			if (token?.Value.TokenType is not TokenType.Close)
-			{
-				throw new ParsingException("No corresponding closing token");
-			}
-
-			Increment(ref token);
-
-			return node;
-		}
-
-		throw new ParsingException($"Tok {token?.Value} is invalid at this position");
-	}
-
-	private static void Increment(ref LinkedListNode<Token>? token)
-	{
-		token = token?.Next;
-	}
+	    // If no valid token is found, throw a ParsingException
+	    throw new ParsingException($"Invalid token '{tokens[index]}' at position {index}");
+    }
 }
