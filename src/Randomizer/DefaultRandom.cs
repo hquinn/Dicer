@@ -1,15 +1,15 @@
-﻿using System.Security.Cryptography;
+﻿ using System;
 
 namespace Dicer;
 
 /// <summary>
-///     Default implementation of <see cref="IRandom" />, which uses <see cref="RandomNumberGenerator" /> under the hood.
+///     Default implementation of <see cref="IRandom" />.
 /// </summary>
 internal class DefaultRandom : IRandom
 {
 	/// <inheritdoc />
 	public int RollDice(int dieSize)
 	{
-		return RandomNumberGenerator.GetInt32(1, dieSize + 1);
+		return Random.Shared.Next(1, dieSize + 1);
 	}
 }

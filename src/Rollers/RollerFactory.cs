@@ -11,7 +11,6 @@ internal static class RollerFactory
 		RollerFactory.random = random;
 	}
 	
-	
 	internal static IRoller Create(this Roller roller)
 	{
 		return roller switch
