@@ -1,20 +1,20 @@
-﻿namespace Dicer;
+﻿namespace Dicer.Nodes;
 
 /// <summary>
-///     Node for adding two <see cref="INode" /> together.
+///     Node for adding two nodes together.
 /// </summary>
 internal record AddNode(BaseNode First, BaseNode Second) : BaseNode
 {
-	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy diceRoundingStrategy)
-	{
-		var firstEval = First.Evaluate(roller, diceRoundingStrategy);
-		var secondEval = Second.Evaluate(roller, diceRoundingStrategy);
-		
-		return NodeResponse.Plus(firstEval, secondEval);
-	}	
+    internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
+    {
+        var firstEval = First.Evaluate(roller, diceRoundingStrategy);
+        var secondEval = Second.Evaluate(roller, diceRoundingStrategy);
 
-	public override string ToString()
-	{
-		return $"ADD({First},{Second})";
-	}
+        return ExpressionResponse.Plus(firstEval, secondEval);
+    }
+
+    public override string ToString()
+    {
+        return $"ADD({First},{Second})";
+    }
 }

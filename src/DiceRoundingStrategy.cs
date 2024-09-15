@@ -4,5 +4,5 @@ public enum DiceRoundingStrategy
 {
     RoundToFloor,
     RoundToCeiling,
-    RoundToNearest,
+    RoundToNearest
 }

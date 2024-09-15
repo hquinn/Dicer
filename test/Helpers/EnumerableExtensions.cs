@@ -5,17 +5,23 @@ namespace Dicer.Tests.Helpers;
 
 public static class EnumerableExtensions
 {
-    public static IEnumerable<RollResponse> AsEnumerable(this RollResponse rollResponse)
+    public static RollResponse[] AsArray(this RollResponse rollResponse)
     {
         return new[] { rollResponse };
     }
 
-    public static IEnumerable<int> Repeat(this int number, int times)
+    public static IReadOnlyCollection<RollResponse> Combine(IReadOnlyCollection<RollResponse> first,
+        IReadOnlyCollection<RollResponse> second)
     {
-        return Enumerable.Repeat(number, times);
+        return first.Concat(second).ToList().AsReadOnly();
     }
 
-    public static IEnumerable<int> Roll(params int[] rolls)
+    public static IReadOnlyCollection<int> Repeat(this int number, int times)
+    {
+        return Enumerable.Repeat(number, times).ToList();
+    }
+
+    public static IReadOnlyCollection<int> Roll(params int[] rolls)
     {
         return rolls;
     }

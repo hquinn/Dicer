@@ -1,22 +1,15 @@
 using System.Linq;
 using Dicer.Tests.Factories;
-using Dicer.Tests.Helpers;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Xunit;
-using static Dicer.Parser;
 using static Dicer.Tests.Helpers.EnumerableExtensions;
 using static Dicer.Tests.Helpers.NodeTestsImplementations;
 
 namespace Dicer.Tests;
 
-public class NodeTests
+public class DiceEvaluatorTests
 {
-    public NodeTests()
-    {
-        RollerFactory.SetRandom(new SequentialRandom());
-    }
-    
     [Theory]
     [InlineData("1", 1)]
     [InlineData("2.51", 2.51)]
@@ -37,12 +30,12 @@ public class NodeTests
     [InlineData("--2", 2)]
     [InlineData("--3.14", 3.14)]
     public void ShouldNotRoundExpressionWithoutDiceNotation_WhenRoundingStrategyIsNoRounding(
-        string expression, 
+        string expression,
         double expected)
     {
         PerformNoDiceNotationTest(expression, expected, RoundingStrategy.NoRounding);
     }
-    
+
     [Theory]
     [InlineData("1", 1)]
     [InlineData("2.51", 2)]
@@ -63,12 +56,12 @@ public class NodeTests
     [InlineData("--2", 2)]
     [InlineData("--3.14", 3)]
     public void ShouldRoundExpressionWithoutDiceNotationToFloor_WhenRoundingStrategyIsRoundToFloor(
-        string expression, 
+        string expression,
         double expected)
     {
         PerformNoDiceNotationTest(expression, expected, RoundingStrategy.RoundToFloor);
     }
-    
+
     [Theory]
     [InlineData("1", 1)]
     [InlineData("2.51", 3)]
@@ -89,12 +82,12 @@ public class NodeTests
     [InlineData("--2", 2)]
     [InlineData("--3.14", 4)]
     public void ShouldRoundExpressionWithoutDiceNotationToCeiling_WhenRoundingStrategyIsRoundToCeiling(
-        string expression, 
+        string expression,
         double expected)
     {
         PerformNoDiceNotationTest(expression, expected, RoundingStrategy.RoundToCeiling);
     }
-    
+
     [Theory]
     [InlineData("1", 1)]
     [InlineData("2.51", 3)]
@@ -105,7 +98,7 @@ public class NodeTests
     [InlineData("2-1", 1)]
     [InlineData("2.41-1.1", 1)]
     [InlineData("2.61-1.1", 2)]
-    [InlineData("2*2", 4)]    
+    [InlineData("2*2", 4)]
     [InlineData("1.2*1.1", 1)]
     [InlineData("2.1*2.2", 5)]
     [InlineData("2/2", 1)]
@@ -115,7 +108,7 @@ public class NodeTests
     [InlineData("--2", 2)]
     [InlineData("--3.14", 3)]
     public void ShouldRoundExpressionWithoutDiceNotationToNearest_WhenRoundingStrategyIsRoundToNearest(
-        string expression, 
+        string expression,
         double expected)
     {
         PerformNoDiceNotationTest(expression, expected, RoundingStrategy.RoundToNearest);
@@ -125,9 +118,9 @@ public class NodeTests
     public void ShouldRollDiceForNormalDiceNotationExpression_WhenRollerIsSet()
     {
         const string expression = "3d6";
-        
+
         using (new AssertionScope())
-        {        
+        {
             PerformBasicDiceNotationTest(expression, Roller.Max, 6.Repeat(3));
             PerformBasicDiceNotationTest(expression, Roller.Average, 4.Repeat(3));
             PerformBasicDiceNotationTest(expression, Roller.Min, 1.Repeat(3));
@@ -141,23 +134,19 @@ public class NodeTests
         const string firstExpression = "-3d-6";
         const string secondExpression = "-3d6";
         const string thirdExpression = "3d-6";
-        
+
         using (new AssertionScope())
         {
             PerformBasicDiceNotationTest(firstExpression, Roller.Max, 6.Repeat(3), dieSize: -6);
             PerformBasicDiceNotationTest(firstExpression, Roller.Average, 4.Repeat(3), dieSize: -6);
             PerformBasicDiceNotationTest(firstExpression, Roller.Min, 1.Repeat(3), dieSize: -6);
             PerformBasicDiceNotationTest(firstExpression, Roller.Random, Roll(1, 2, 3), dieSize: -6);
-            
-            RollerFactory.SetRandom(new SequentialRandom());
-            
+
             PerformBasicDiceNotationTest(secondExpression, Roller.Max, (-6).Repeat(3), dieSize: 6);
             PerformBasicDiceNotationTest(secondExpression, Roller.Average, (-4).Repeat(3), dieSize: 6);
             PerformBasicDiceNotationTest(secondExpression, Roller.Min, (-1).Repeat(3), dieSize: 6);
             PerformBasicDiceNotationTest(secondExpression, Roller.Random, Roll(-1, -2, -3), dieSize: 6);
-            
-            RollerFactory.SetRandom(new SequentialRandom());
-            
+
             PerformBasicDiceNotationTest(thirdExpression, Roller.Max, (-6).Repeat(3), dieSize: -6);
             PerformBasicDiceNotationTest(thirdExpression, Roller.Average, (-4).Repeat(3), dieSize: -6);
             PerformBasicDiceNotationTest(thirdExpression, Roller.Min, (-1).Repeat(3), dieSize: -6);
@@ -169,7 +158,7 @@ public class NodeTests
     public void ShouldKeepHighestRolls_WhenExpressionHasAPositiveKeep()
     {
         const string expression = "4d6k3";
-        
+
         using (new AssertionScope())
         {
             PerformBasicDiceNotationTest(expression, Roller.Max, 6.Repeat(3), Roll(6));
@@ -183,7 +172,7 @@ public class NodeTests
     public void ShouldKeepLowestRolls_WhenExpressionHasANegativeKeep()
     {
         const string expression = "4d6k-3";
-        
+
         using (new AssertionScope())
         {
             PerformBasicDiceNotationTest(expression, Roller.Max, 6.Repeat(3), Roll(6));
@@ -197,7 +186,7 @@ public class NodeTests
     public void ShouldRollWithMinimumValues_WhenExpressionHasAMinimumBelowDieSize()
     {
         const string expression = "3d6m5";
-        
+
         using (new AssertionScope())
         {
             PerformBasicDiceNotationTest(expression, Roller.Max, 6.Repeat(3));
@@ -211,7 +200,7 @@ public class NodeTests
     public void ShouldNotRollWithMinimumValues_WhenExpressionHasAMinimumAboveDieSize()
     {
         const string expression = "3d6m7";
-        
+
         using (new AssertionScope())
         {
             PerformBasicDiceNotationTest(expression, Roller.Max, 6.Repeat(3));
@@ -225,7 +214,7 @@ public class NodeTests
     public void ShouldKeepRollsWithMinimum_WhenExpressionHasAKeepAndMinimum()
     {
         const string expression = "4d6k3m5";
-        
+
         using (new AssertionScope())
         {
             PerformBasicDiceNotationTest(expression, Roller.Max, 6.Repeat(3), Roll(6));
@@ -241,7 +230,7 @@ public class NodeTests
         const DiceRoundingStrategy ceiling = DiceRoundingStrategy.RoundToCeiling;
         const DiceRoundingStrategy floor = DiceRoundingStrategy.RoundToFloor;
         const DiceRoundingStrategy nearest = DiceRoundingStrategy.RoundToNearest;
-        
+
         using (new AssertionScope())
         {
             PerformBasicDiceNotationTest("3.9d5.51k2.01", Roller.Average, 4.Repeat(3), Roll(4), ceiling);
@@ -266,14 +255,16 @@ public class NodeTests
     public void ShouldRepeatRolls_WhenUsingTheRepeatingNode()
     {
         // Arrange
-        var sut = Parse("3d6", "3.01");
+        var diceExpression = DiceExpressionParser.Parse("3d6");
+        var repeatingDiceExpression = DiceExpressionParser.Parse("3.01");
+        var sut = DiceEvaluatorFactory.Create();
 
         // Act
-        var actual = sut.Evaluate(Roller.Max, RoundingStrategy.RoundToFloor);
+        var actual = sut.Evaluate(diceExpression, repeatingDiceExpression, Roller.Max);
 
         // Assert
-        var nodeResponse = new NodeResponse(18, RollResponseFactory.Create(6, 6.Repeat(3), null));
-        var expected = new[] { nodeResponse, nodeResponse, nodeResponse, };
+        var nodeResponse = new ExpressionResponse(18, RollResponseFactory.Create(6, 6.Repeat(3), null));
+        var expected = new[] { nodeResponse, nodeResponse, nodeResponse };
         actual.Should().BeEquivalentTo(expected);
     }
 
@@ -281,12 +272,12 @@ public class NodeTests
     public void ShouldNotHaveRollsOutsideOfDieSize_WhenUsingDefaultRandom()
     {
         // Arrange
-        RollerFactory.SetRandom(new DefaultRandom());
-        var sut = Parse("100d2");
-        
+        var sut = DiceEvaluatorFactory.CreateWithDefaults();
+        var diceExpression = DiceExpressionParser.Parse("100d2");
+
         // Act
-        var actual = sut.Evaluate();
-        
+        var actual = sut.Evaluate(diceExpression);
+
         // Assert
         actual.RollResponses
             .SelectMany(x => x.Rolls.Select(y => y.Result))

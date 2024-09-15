@@ -1,20 +1,20 @@
-﻿namespace Dicer;
+﻿namespace Dicer.Nodes;
 
 /// <summary>
-///     Node for multiplying two <see cref="INode" /> together.
+///     Node for multiplying two nodes together.
 /// </summary>
 internal record MultiplyNode(BaseNode First, BaseNode Second) : BaseNode
 {
-	internal override NodeResponse Evaluate(IRoller roller, IRoundingStrategy diceRoundingStrategy)
-	{
-		var firstEval = First.Evaluate(roller, diceRoundingStrategy);
-		var secondEval = Second.Evaluate(roller, diceRoundingStrategy);
+    internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
+    {
+        var firstEval = First.Evaluate(roller, diceRoundingStrategy);
+        var secondEval = Second.Evaluate(roller, diceRoundingStrategy);
 
-		return NodeResponse.Times(firstEval, secondEval);
-	}
+        return ExpressionResponse.Times(firstEval, secondEval);
+    }
 
-	public override string ToString()
-	{
-		return $"MULTIPLY({First},{Second})";
-	}
+    public override string ToString()
+    {
+        return $"MULTIPLY({First},{Second})";
+    }
 }

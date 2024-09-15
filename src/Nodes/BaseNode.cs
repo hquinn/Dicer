@@ -1,20 +1,16 @@
-﻿namespace Dicer;
+﻿namespace Dicer.Nodes;
 
-internal abstract record BaseNode : INode
+internal abstract record BaseNode : IDiceExpression
 {
-	public NodeResponse Evaluate(
-		Roller selectedRoller, 
-		RoundingStrategy selectedRoundingStrategy, 
-		DiceRoundingStrategy selectedDiceRoundingStrategy)
-	{
-		var roller = selectedRoller.Create();
-		var roundingStrategy = selectedRoundingStrategy.Create();
-		var diceRoundingStrategy = selectedDiceRoundingStrategy.Create();
-		
-		var result = Evaluate(roller, diceRoundingStrategy);
+    public ExpressionResponse Evaluate(
+        IDiceRoller roller,
+        IRoundingStrategy resultRoundingStrategy,
+        IRoundingStrategy diceRoundingStrategy)
+    {
+        var result = Evaluate(roller, diceRoundingStrategy);
 
-		return new NodeResponse(roundingStrategy.Round(result.Result), result.RollResponses);
-	}
+        return new ExpressionResponse(resultRoundingStrategy.Round(result.Result), result.RollResponses);
+    }
 
-	internal abstract NodeResponse Evaluate(IRoller roller, IRoundingStrategy diceRoundingStrategy);
+    internal abstract ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy);
 }

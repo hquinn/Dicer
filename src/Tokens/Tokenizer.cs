@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dicer.Exceptions;
 
-namespace Dicer;
+namespace Dicer.Tokens;
 
 internal static class Tokenizer
 {
@@ -15,13 +16,9 @@ internal static class Tokenizer
             var character = input[i];
 
             if (char.IsDigit(character))
-            {
                 tokens.Add(new Token(ParseNumber(input.AsSpan(), ref i)));
-            }
             else
-            {
                 AddOperatorToken(character, tokens);
-            }
         }
 
         return tokens;
@@ -38,11 +35,8 @@ internal static class Tokenizer
             if (current == '.')
             {
                 dotCount++;
-                
-                if (dotCount > 1)
-                {
-                    break;
-                }
+
+                if (dotCount > 1) break;
             }
             else if (!char.IsDigit(current))
             {
@@ -87,9 +81,7 @@ internal static class Tokenizer
                 break;
             default:
                 if (!char.IsWhiteSpace(character))
-                {
                     throw new ParsingException($"Token '{character}' cannot be tokenized.");
-                }
                 break;
         }
     }

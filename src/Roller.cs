@@ -2,8 +2,8 @@
 
 public enum Roller
 {
-	Random,
-	Min,
-	Average,
-	Max,
+    Random,
+    Min,
+    Average,
+    Max
 }
