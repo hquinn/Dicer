@@ -1,9 +1,12 @@
-﻿namespace Dicer.Nodes;
+﻿using Dicer.Rollers;
+using Dicer.Rounding;
+
+namespace Dicer.Nodes;
 
 /// <summary>
-///     Node that represents the unary of an <see cref="IDiceExpression" />.
+///     Node that represents the unary of an <see cref="DiceExpression" />.
 /// </summary>
-internal record UnaryNode(BaseNode Node) : BaseNode
+internal record UnaryNode(DiceExpression Node) : DiceExpression
 {
     internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
     {

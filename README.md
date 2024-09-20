@@ -28,10 +28,10 @@ initializes a number of objects which should be re-used. If you're not using a D
 IDiceEvaluator diceEvaluator = DiceEvaluator.Instance;
 ```
 
-You can then create an `IDiceExpression` by using the `DiceExpressionParser.Parse` static method:
+You can then create an `DiceExpression` by using the `DiceExpressionParser.Parse` static method:
 
 ```csharp
-IDiceExpression expression = DiceExpressionParser.Parse("1d8 + 3");
+DiceExpression expression = DiceExpressionParser.Parse("1d8 + 3");
 ```
 
 Finally, you can evaluate the expression by calling the `Evaluate` method on the `IDiceEvaluator`:
@@ -39,6 +39,14 @@ Finally, you can evaluate the expression by calling the `Evaluate` method on the
 ```csharp
 ExpressionResponse response = diceEvaluator.Evaluate(expression);
 ```
+
+If you don't want to use the `DiceExpressionParser`, you can create the `DiceExpression` object directly:
+
+```csharp
+ExpressionResponse response = diceEvaluator.Evaluate("1d8 + 3");
+```
+
+The drawback in this approach is that `Evaluate` will parse the expression every time it's called, which can be expensive if you're evaluating the same expression multiple times.
 
 #### ExpressionResponse deep-dive
 
@@ -86,7 +94,7 @@ additional overload to specifically round dice values (`DiceRoundingStrategy`) w
 To use, simply pass the overloaded parameters into the `Evaluate` function:
 
 ```csharp
-IDiceExpression expression = DiceExpressionParser.Parse("1d8 + 3");
+DiceExpression expression = DiceExpressionParser.Parse("1d8 + 3");
 ExpressionResponse response = diceEvaluator.Evaluate(expression, Roller.Max, RoundingStrategy.NoRounding, DiceRoundingStrategy.RoundToNearest);
 ```
 
@@ -95,12 +103,12 @@ ExpressionResponse response = diceEvaluator.Evaluate(expression, Roller.Max, Rou
 Dicer has support for repeating dice expressions as an overload for `Evaluate`:
 
 ```csharp
-IDiceExpression expression = DiceExpressionParser.Parse("4D6K3");
+DiceExpression expression = DiceExpressionParser.Parse("4D6K3");
 IReadOnlyCollection<ExpressionResponse> responses = diceEvaluator.Evaluate(expression, 6);
 
 // OR
-IDiceExpression expression = DiceExpressionParser.Parse("4D6K3");
-IDiceExpression repeatingExpression = DiceExpressionParser.Parse("1D6");
+DiceExpression expression = DiceExpressionParser.Parse("4D6K3");
+DiceExpression repeatingExpression = DiceExpressionParser.Parse("1D6");
 IReadOnlyCollection<ExpressionResponse> responses = diceEvaluator.Evaluate(expression, repeatingExpression);
 ```
 

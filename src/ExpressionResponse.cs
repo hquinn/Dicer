@@ -5,7 +5,7 @@ using Dicer.Helpers;
 namespace Dicer;
 
 /// <summary>
-///     Represents the result from calculating an <see cref="IDiceExpression" />.
+///     Represents the result from calculating an <see cref="DiceExpression" />.
 /// </summary>
 public record ExpressionResponse
 {
@@ -16,12 +16,12 @@ public record ExpressionResponse
     }
 
     /// <summary>
-    ///     Final result of the calculation from the <see cref="IDiceExpression" />.
+    ///     Final result of the calculation from the <see cref="DiceExpression" />.
     /// </summary>
     public double Result { get; }
 
     /// <summary>
-    ///     All rolls and results which occurred from the <see cref="IDiceExpression" />.
+    ///     All rolls and results which occurred from the <see cref="DiceExpression" />.
     /// </summary>
     public IReadOnlyCollection<RollResponse> RollResponses { get; }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Dicer.Exceptions;
 using FluentAssertions;
 using Xunit;
 using static Dicer.DiceExpressionParser;

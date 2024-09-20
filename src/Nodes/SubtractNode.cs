@@ -1,9 +1,12 @@
-﻿namespace Dicer.Nodes;
+﻿using Dicer.Rollers;
+using Dicer.Rounding;
+
+namespace Dicer.Nodes;
 
 /// <summary>
 ///     Node for subtracting two nodes together.
 /// </summary>
-internal record SubtractNode(BaseNode First, BaseNode Second) : BaseNode
+internal record SubtractNode(DiceExpression First, DiceExpression Second) : DiceExpression
 {
     internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
     {

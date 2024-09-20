@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Dicer.Exceptions;
 using Dicer.Nodes;
 using Dicer.Tokens;
 
@@ -8,9 +7,9 @@ namespace Dicer;
 public static class DiceExpressionParser
 {
     /// <summary>
-    ///     Parses the <paramref name="input" /> into an <see cref="IDiceExpression" /> expression tree.
+    ///     Parses the <paramref name="input" /> into an <see cref="DiceExpression" /> expression tree.
     /// </summary>
-    public static IDiceExpression Parse(string input)
+    public static DiceExpression Parse(string input)
     {
         var tokens = Tokenizer.Tokenize(input);
         var index = 0;
@@ -24,7 +23,7 @@ public static class DiceExpressionParser
         return node;
     }
 
-    private static BaseNode ParseAddSubtract(List<Token> tokens, ref int index)
+    private static DiceExpression ParseAddSubtract(List<Token> tokens, ref int index)
     {
         var lhs = ParseMultiplyDivide(tokens, ref index);
 
@@ -50,7 +49,7 @@ public static class DiceExpressionParser
         return lhs;
     }
 
-    private static BaseNode ParseMultiplyDivide(List<Token> tokens, ref int index)
+    private static DiceExpression ParseMultiplyDivide(List<Token> tokens, ref int index)
     {
         var lhs = ParseDice(tokens, ref index);
 
@@ -76,7 +75,7 @@ public static class DiceExpressionParser
         return lhs;
     }
 
-    private static BaseNode ParseDice(List<Token> tokens, ref int index)
+    private static DiceExpression ParseDice(List<Token> tokens, ref int index)
     {
         var lhs = ParseUnary(tokens, ref index); // Parse the left-hand side (before 'd')
 
@@ -89,8 +88,8 @@ public static class DiceExpressionParser
                 var rhs = ParseUnary(tokens, ref index); // Parse right-hand side (after 'd')
 
                 // Prepare placeholders for 'Keep' and 'Minimum' nodes
-                BaseNode? khs = null;
-                BaseNode? mhs = null;
+                DiceExpression? khs = null;
+                DiceExpression? mhs = null;
 
                 // Check for 'Keep' or 'Minimum' tokens (in any order)
                 while (index < tokens.Count && tokens[index].TokenType is TokenType.Keep or TokenType.Minimum)
@@ -134,7 +133,7 @@ public static class DiceExpressionParser
         return lhs;
     }
 
-    private static BaseNode ParseUnary(List<Token> tokens, ref int index)
+    private static DiceExpression ParseUnary(List<Token> tokens, ref int index)
     {
         while (index < tokens.Count)
         {
@@ -156,7 +155,7 @@ public static class DiceExpressionParser
         return ParseLeaf(tokens, ref index);
     }
 
-    private static BaseNode ParseLeaf(List<Token> tokens, ref int index)
+    private static DiceExpression ParseLeaf(List<Token> tokens, ref int index)
     {
         if (index >= tokens.Count)
         {

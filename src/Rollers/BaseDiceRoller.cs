@@ -2,6 +2,7 @@
 using System.Linq;
 using Dicer.Helpers;
 using Dicer.Models;
+using Dicer.Rounding;
 
 namespace Dicer.Rollers;
 

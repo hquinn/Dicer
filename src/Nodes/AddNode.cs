@@ -1,9 +1,12 @@
-﻿namespace Dicer.Nodes;
+﻿using Dicer.Rollers;
+using Dicer.Rounding;
+
+namespace Dicer.Nodes;
 
 /// <summary>
 ///     Node for adding two nodes together.
 /// </summary>
-internal record AddNode(BaseNode First, BaseNode Second) : BaseNode
+internal record AddNode(DiceExpression First, DiceExpression Second) : DiceExpression
 {
     internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
     {

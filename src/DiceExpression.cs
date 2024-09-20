@@ -1,8 +1,11 @@
-﻿namespace Dicer.Nodes;
+﻿using Dicer.Rollers;
+using Dicer.Rounding;
 
-internal abstract record BaseNode : IDiceExpression
+namespace Dicer;
+
+public abstract record DiceExpression
 {
-    public ExpressionResponse Evaluate(
+    internal ExpressionResponse Evaluate(
         IDiceRoller roller,
         IRoundingStrategy resultRoundingStrategy,
         IRoundingStrategy diceRoundingStrategy)

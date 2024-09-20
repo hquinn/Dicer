@@ -1,4 +1,6 @@
-﻿namespace Dicer.Rollers;
+﻿using Dicer.Rounding;
+
+namespace Dicer.Rollers;
 
 /// <summary>
 ///     Rolls dice using the average roll for each die.

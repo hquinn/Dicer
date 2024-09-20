@@ -1,9 +1,11 @@
-﻿namespace Dicer;
+﻿using Dicer.Rounding;
+
+namespace Dicer.Rollers;
 
 /// <summary>
 ///     Interface for implementing different rolling strategies.
 /// </summary>
-public interface IDiceRoller
+internal interface IDiceRoller
 {
 	/// <summary>
 	///     Rolls dice using the specified strategy.

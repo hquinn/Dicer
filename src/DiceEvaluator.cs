@@ -45,7 +45,7 @@ public class DiceEvaluator : IDiceEvaluator
     ///     <inheritdoc />
     /// </summary>
     public ExpressionResponse Evaluate(
-        IDiceExpression expression,
+        DiceExpression expression,
         Roller selectedRoller = Roller.Random,
         RoundingStrategy selectedRoundingStrategy = RoundingStrategy.RoundToFloor,
         DiceRoundingStrategy selectedDiceRoundingStrategy = DiceRoundingStrategy.RoundToCeiling)
@@ -61,7 +61,7 @@ public class DiceEvaluator : IDiceEvaluator
     ///     <inheritdoc />
     /// </summary>
     public IReadOnlyCollection<ExpressionResponse> Evaluate(
-        IDiceExpression expression,
+        DiceExpression expression,
         int numberOfTimes,
         Roller selectedRoller = Roller.Random,
         RoundingStrategy selectedRoundingStrategy = RoundingStrategy.RoundToFloor,
@@ -87,8 +87,8 @@ public class DiceEvaluator : IDiceEvaluator
     ///     <inheritdoc />
     /// </summary>
     public IReadOnlyCollection<ExpressionResponse> Evaluate(
-        IDiceExpression expression,
-        IDiceExpression numberOfTimesExpression,
+        DiceExpression expression,
+        DiceExpression numberOfTimesExpression,
         Roller selectedRoller = Roller.Random,
         RoundingStrategy selectedRoundingStrategy = RoundingStrategy.RoundToFloor,
         DiceRoundingStrategy selectedDiceRoundingStrategy = DiceRoundingStrategy.RoundToCeiling)

@@ -1,11 +1,13 @@
 ﻿using Dicer.Helpers;
+using Dicer.Rollers;
+using Dicer.Rounding;
 
 namespace Dicer.Nodes;
 
 /// <summary>
 ///     Node for representing dice.
 /// </summary>
-internal record DiceNode(BaseNode NumDice, BaseNode DieSize, BaseNode? Keep = null, BaseNode? Minimum = null) : BaseNode
+internal record DiceNode(DiceExpression NumDice, DiceExpression DieSize, DiceExpression? Keep = null, DiceExpression? Minimum = null) : DiceExpression
 {
     internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
     {

@@ -1,9 +1,12 @@
-﻿namespace Dicer.Nodes;
+﻿using Dicer.Rollers;
+using Dicer.Rounding;
+
+namespace Dicer.Nodes;
 
 /// <summary>
 ///     Node for dividing two nodes together.
 /// </summary>
-internal record DivideNode(BaseNode First, BaseNode Second) : BaseNode
+internal record DivideNode(DiceExpression First, DiceExpression Second) : DiceExpression
 {
     internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
     {

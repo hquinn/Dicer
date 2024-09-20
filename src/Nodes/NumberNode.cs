@@ -1,9 +1,12 @@
-﻿namespace Dicer.Nodes;
+﻿using Dicer.Rollers;
+using Dicer.Rounding;
+
+namespace Dicer.Nodes;
 
 /// <summary>
 ///     Node that represents a number.
 /// </summary>
-internal record NumberNode(double Number) : BaseNode
+internal record NumberNode(double Number) : DiceExpression
 {
     internal override ExpressionResponse Evaluate(IDiceRoller roller, IRoundingStrategy diceRoundingStrategy)
     {
