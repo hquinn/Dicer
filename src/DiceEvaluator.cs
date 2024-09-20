@@ -107,6 +107,9 @@ public class DiceEvaluator : IDiceEvaluator
             selectedDiceRoundingStrategy);
     }
 
+    /// <summary>
+    ///     <inheritdoc />
+    /// </summary>
     public ExpressionResponse Evaluate(
         string expressionToParse, 
         Roller selectedRoller = Roller.Random,
@@ -122,6 +125,9 @@ public class DiceEvaluator : IDiceEvaluator
             selectedDiceRoundingStrategy);
     }
 
+    /// <summary>
+    ///     <inheritdoc />
+    /// </summary>
     public IReadOnlyCollection<ExpressionResponse> Evaluate(
         string expressionToParse, 
         int numberOfTimes, 
@@ -139,6 +145,9 @@ public class DiceEvaluator : IDiceEvaluator
             selectedDiceRoundingStrategy);
     }
 
+    /// <summary>
+    ///     <inheritdoc />
+    /// </summary>
     public IReadOnlyCollection<ExpressionResponse> Evaluate(
         string expressionToParse, 
         string numberOfTimesExpressionToParse, 
