@@ -16,7 +16,10 @@ public static class DiceExpressionParser
         var index = 0;
         var node = ParseAddSubtract(tokens, ref index);
 
-        if (index < tokens.Count) throw new ParsingException($"Token {tokens[index]} is invalid at this position");
+        if (index < tokens.Count)
+        {
+            throw new ParsingException($"Token {tokens[index]} is invalid at this position");
+        }
 
         return node;
     }
@@ -78,6 +81,7 @@ public static class DiceExpressionParser
         var lhs = ParseUnary(tokens, ref index); // Parse the left-hand side (before 'd')
 
         while (index < tokens.Count)
+        {
             // Check for 'Dice' token
             if (tokens[index].TokenType == TokenType.Dice)
             {
@@ -90,6 +94,7 @@ public static class DiceExpressionParser
 
                 // Check for 'Keep' or 'Minimum' tokens (in any order)
                 while (index < tokens.Count && tokens[index].TokenType is TokenType.Keep or TokenType.Minimum)
+                {
                     if (tokens[index].TokenType is TokenType.Keep)
                     {
                         index++; // Move past the 'Keep' token
@@ -100,21 +105,31 @@ public static class DiceExpressionParser
                         index++; // Move past the 'Minimum' token
                         mhs = ParseUnary(tokens, ref index); // Parse the expression after 'Minimum'
                     }
+                }
 
                 // Now construct the DiceNode based on what we have
                 if (khs is not null && mhs is not null)
+                {
                     lhs = new DiceNode(lhs, rhs, khs, mhs); // Dice with both Keep and Minimum
+                }
                 else if (khs is not null)
+                {
                     lhs = new DiceNode(lhs, rhs, khs); // Dice with only Keep
+                }
                 else if (mhs is not null)
+                {
                     lhs = new DiceNode(lhs, rhs, null, mhs); // Dice with only Minimum
+                }
                 else
+                {
                     lhs = new DiceNode(lhs, rhs); // Just Dice without Keep or Minimum
+                }
             }
             else
             {
                 return lhs; // Return if no Dice token found
             }
+        }
 
         return lhs;
     }
@@ -122,6 +137,7 @@ public static class DiceExpressionParser
     private static BaseNode ParseUnary(List<Token> tokens, ref int index)
     {
         while (index < tokens.Count)
+        {
             switch (tokens[index].TokenType)
             {
                 case TokenType.Add:
@@ -135,13 +151,17 @@ public static class DiceExpressionParser
                 default:
                     return ParseLeaf(tokens, ref index);
             }
+        }
 
         return ParseLeaf(tokens, ref index);
     }
 
     private static BaseNode ParseLeaf(List<Token> tokens, ref int index)
     {
-        if (index >= tokens.Count) throw new ParsingException("Unexpected end of input");
+        if (index >= tokens.Count)
+        {
+            throw new ParsingException("Unexpected end of input");
+        }
 
         // Check for a number
         if (tokens[index].TokenType == TokenType.Number)
@@ -159,7 +179,9 @@ public static class DiceExpressionParser
 
             // Check for a closing parenthesis
             if (index >= tokens.Count || tokens[index].TokenType != TokenType.Close)
+            {
                 throw new ParsingException("No corresponding closing parenthesis found");
+            }
 
             index++; // Move past the ')' token
             return node;

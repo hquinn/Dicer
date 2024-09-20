@@ -56,10 +56,9 @@ public static class NodeTestsImplementations
     {
         // Arrange
         var sut = DiceEvaluatorFactory.Create();
-        var diceExpression = DiceExpressionParser.Parse(expression);
 
         // Act
-        var actual = sut.Evaluate(diceExpression, roller, RoundingStrategy.NoRounding, diceRoundingStrategy);
+        var actual = sut.Evaluate(expression, roller, RoundingStrategy.NoRounding, diceRoundingStrategy);
 
         // Assert
 

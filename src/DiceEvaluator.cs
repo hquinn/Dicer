@@ -106,4 +106,54 @@ public class DiceEvaluator : IDiceEvaluator
             selectedRoundingStrategy,
             selectedDiceRoundingStrategy);
     }
+
+    public ExpressionResponse Evaluate(
+        string expressionToParse, 
+        Roller selectedRoller = Roller.Random,
+        RoundingStrategy selectedRoundingStrategy = RoundingStrategy.RoundToFloor,
+        DiceRoundingStrategy selectedDiceRoundingStrategy = DiceRoundingStrategy.RoundToCeiling)
+    {
+        var expression = DiceExpressionParser.Parse(expressionToParse);
+        
+        return Evaluate(
+            expression, 
+            selectedRoller, 
+            selectedRoundingStrategy, 
+            selectedDiceRoundingStrategy);
+    }
+
+    public IReadOnlyCollection<ExpressionResponse> Evaluate(
+        string expressionToParse, 
+        int numberOfTimes, 
+        Roller selectedRoller = Roller.Random,
+        RoundingStrategy selectedRoundingStrategy = RoundingStrategy.RoundToFloor,
+        DiceRoundingStrategy selectedDiceRoundingStrategy = DiceRoundingStrategy.RoundToCeiling)
+    {
+        var expression = DiceExpressionParser.Parse(expressionToParse);
+        
+        return Evaluate(
+            expression,
+            numberOfTimes,
+            selectedRoller,
+            selectedRoundingStrategy,
+            selectedDiceRoundingStrategy);
+    }
+
+    public IReadOnlyCollection<ExpressionResponse> Evaluate(
+        string expressionToParse, 
+        string numberOfTimesExpressionToParse, 
+        Roller selectedRoller = Roller.Random,
+        RoundingStrategy selectedRoundingStrategy = RoundingStrategy.RoundToFloor,
+        DiceRoundingStrategy selectedDiceRoundingStrategy = DiceRoundingStrategy.RoundToCeiling)
+    {
+        var expression = DiceExpressionParser.Parse(expressionToParse);
+        var numberOfTimesExpression = DiceExpressionParser.Parse(numberOfTimesExpressionToParse);
+        
+        return Evaluate(
+            expression,
+            numberOfTimesExpression,
+            selectedRoller,
+            selectedRoundingStrategy,
+            selectedDiceRoundingStrategy);
+    }
 }
