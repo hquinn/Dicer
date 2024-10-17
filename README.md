@@ -1,3 +1,5 @@
+# OBSOLETE! Please use hquinn/RollCraft instead
+
 # Dicer - An open source dice expression library
 
 ![NuGet](https://img.shields.io/nuget/v/Dicer)
